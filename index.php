@@ -23,6 +23,7 @@ if (isset($_POST["signup"])) {
   $password = mysqli_real_escape_string($conn, md5($_POST["regis_password"]));
   $cpassword = mysqli_real_escape_string($conn, md5($_POST["regis_cpassword"]));
   $contactNumber = mysqli_real_escape_string($conn, ($_POST["regis_contactnumber"]));
+  $token =  mysqli_real_escape_string($conn, (md5(date("Y-m-d").$email)));
 
   $check_email = mysqli_num_rows(mysqli_query($conn, "SELECT email FROM users_tbl WHERE email='$email'"));
 
@@ -32,7 +33,7 @@ if (isset($_POST["signup"])) {
     echo "<script>alert('Email already exists in out database.');</script>";
   } else {
     
-    $sql = "INSERT INTO users_tbl (fname, lname, sex, age, email, username, password, contactnumber) VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber')";
+    $sql = "INSERT INTO users_tbl (fname, lname, sex, age, email, username, password, contactnumber,token) VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber','$token')";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       $_POST["regis_fname"] = "";
@@ -103,8 +104,8 @@ if (isset($_POST["login"])) {
             <input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required />
           </div>
           <input type="submit" value="login" name="login" class="btn solid" />
-          <!-- <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a href="forgot-password.php" style="color: #4590ef;">Forgot Password?</a></p> -->
-        </form>
+          <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a href="forgot-password.php" style="color: #4590ef;">Forgot Password?</a></p>
+         </form>
         <!-- register -->
         <form action="" class="sign-up-form" method="post">
           <h2 class="title">Register</h2>

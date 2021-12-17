@@ -26,15 +26,19 @@ if (isset($_POST["signup"])) {
   $token =  mysqli_real_escape_string($conn, (md5(date("Y-m-d").$email)));
 
   $check_email = mysqli_num_rows(mysqli_query($conn, "SELECT email FROM users_tbl WHERE email='$email'"));
-
+  
   if ($password !== $cpassword) {
     echo "<script>alert('Password did not match.');</script>";
   } elseif ($check_email > 0) {
     echo "<script>alert('Email already exists in out database.');</script>";
   } else {
     
-    $sql = "INSERT INTO users_tbl (fname, lname, sex, age, email, username, password, contactnumber,token) VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber','$token')";
-    $result = mysqli_query($conn, $sql);
+    $sql = "INSERT INTO users_tbl (fname, lname, sex, age, email, username, password, contactnumber, token) 
+            VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber','$token'); 
+            INSERT INTO users_img (ID)SELECT ID FROM users_tbl WHERE email='$email'";
+         
+    $result = mysqli_multi_query($conn, $sql);
+    
     if ($result) {
       $_POST["regis_fname"] = "";
       $_POST["regis_lname"] = "";
@@ -48,8 +52,10 @@ if (isset($_POST["signup"])) {
       echo "<script>alert('User registered.');</script>";
     }else{
       echo "<script>alert('User registration failed');</script>";
+     
     }
   } 
+
 }
 
 if (isset($_POST["login"])) {
@@ -85,7 +91,7 @@ if (isset($_POST["login"])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style_index.css" />
   <title>Log in and Registration</title>
 </head>
 

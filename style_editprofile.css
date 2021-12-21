@@ -2,10 +2,11 @@
     margin-top: 100px;
     border: 1px solid #e0e0e0;
     padding-top: 15px;
+    width: 10px;
 }
 #profileDisplay{
-    display: block;
-    width: 60%;
+ 
+    width: 50%;
     margin: 10px auto;
-    border-radius: 50%;
+    border-radius: 10%;
 }

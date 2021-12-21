@@ -5,7 +5,7 @@ session_start();
 
 error_reporting(0);
 if (isset($_SESSION["user_id"])) {
-  header("Location: homepage.php");
+  header("Location: home.php");
 }
 
 if (isset($_POST["signup"])) {
@@ -27,6 +27,7 @@ if (isset($_POST["signup"])) {
 
   $check_email = mysqli_num_rows(mysqli_query($conn, "SELECT email FROM users_tbl WHERE email='$email'"));
   
+
   if ($password !== $cpassword) {
     echo "<script>alert('Password did not match.');</script>";
   } elseif ($check_email > 0) {
@@ -34,11 +35,11 @@ if (isset($_POST["signup"])) {
   } else {
     
     $sql = "INSERT INTO users_tbl (fname, lname, sex, age, email, username, password, contactnumber, token) 
-            VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber','$token'); 
-            INSERT INTO users_img (ID)SELECT ID FROM users_tbl WHERE email='$email'";
-         
+            VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber','$token');
+            INSERT INTO users_img (ID) SELECT ID FROM users_tbl WHERE email='$email';
+            UPDATE users_img, users_tbl SET users_img.profile_image='img/default_img.png', users_img.bio='No bio.' WHERE users_img.ID=users_tbl.ID;";     
     $result = mysqli_multi_query($conn, $sql);
-    
+
     if ($result) {
       $_POST["regis_fname"] = "";
       $_POST["regis_lname"] = "";
@@ -71,11 +72,11 @@ if (isset($_POST["login"])) {
     if (mysqli_num_rows($check_email) > 0){
       $row = mysqli_fetch_assoc($check_email);
       $_SESSION["user_id"] = $row['ID'];
-      header("Location: homepage.php");
-    }else{
+      header("Location: home.php");
+    }else if(mysqli_num_rows($check_username) > 0){
       $row = mysqli_fetch_assoc($check_username);
       $_SESSION["user_id"] = $row['ID'];
-      header("Location: homepage.php");
+      header("Location: home.php");
     }
   } else {
     echo "<script>alert('Login details is incorrect. Please try again.');</script>";
@@ -162,7 +163,7 @@ if (isset($_POST["login"])) {
         <div class="content">
           <h3>New here ?</h3>
           <p>
-            What are you waiting for? Click the button!
+            What are you waiting for? Join Us!
           </p>
           <button class="btn transparent" id="sign-up-btn">
             Sign up 

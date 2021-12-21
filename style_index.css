@@ -25,6 +25,7 @@ input {
   height: 100%;
   top: 0;
   left: 0;
+ 
 }
 
 .signin-signup {
@@ -37,6 +38,7 @@ input {
   display: grid;
   grid-template-columns: 1fr;
   z-index: 5;
+  
 }
 
 form {
@@ -185,6 +187,7 @@ form.sign-in-form {
   left: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  padding-top: 5%;
 }
 
 .container:before {

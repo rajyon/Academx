@@ -4,15 +4,28 @@ body{
     font-family: "Poppins", sans-serif;
 }
 
-header{
+.master header{
     position: fixed;
     background: #3F3F3F;
-    padding: 20px;
     width:100%;
-    height: 30px;
-
+    height:70px;
+    z-index: 1;
 }
-.left_area h3{
+.master span{
+    color:#5AC7C7
+}
+.master header label{
+    position:absolute;
+    top: 16px;
+    background-color: #3F3F3F;
+}
+.master .left_area1{
+    position:absolute;
+    top: 16px;
+    background-color: #3F3F3F;
+ 
+}
+.master .left_area1 h3{
     color: #fff;
     margin: 0;
     margin-left: 45px;
@@ -21,21 +34,25 @@ header{
     text-transform: uppercase;
     font-size: 22px;
     font-weight: 900;
-}
-.left_area span{
-    color:#5AC7C7
+    padding-left: 10px;
 }
 
-.sidebar{
+.master .sidebar span{
+    color:white
+}
+
+.master .sidebar{
+    position: fixed;
     background: #7B1324;
     margin-top: 70px;
     padding-top: 30px;
-    position: fixed;
+    width: 15%;
+    height: 100vh;
     left: 0;
-    width: 250px;
-    height: 100%;
     transition: 0.5s;
     transition-property: left;
+    z-index: 0;
+    
 }
 .sidebar .profile_image{
     width: 150px;
@@ -43,18 +60,25 @@ header{
     border-radius: 100px;
     margin-bottom: 10px;
 }
-.sidebar h4{
+.master .sidebar h4{
     color: #ccc;
     margin-top: 0px;
     margin-bottom: 20px;
+    font: 18px Fantasy;
 }
-.sidebar a{
+.master .sidebar h5{
+    color: #ccc;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    font: 12px sans-serif;
+}
+.master .sidebar a{
     color: #fff;
     display: block;
     width: 100%;
     line-height: 60px;
     text-decoration: none;
-    padding-left: 40px;
+    padding-left: 30px;
     box-sizing:border-box;
     transition: 0.5s;
     transition-property: background;
@@ -62,15 +86,15 @@ header{
 .sidebar a:hover{
     background: #5AC7C7;
 }
-.sidebar i{
+.master .sidebar i{
     padding-right: 10px;
 }
-label #sidebar_btn{
+.master label #sidebar_btn{
     z-index: 1;
     color: #fff;
     position: fixed;
     cursor: pointer;
-    left: 24px;
+    left: 20px;
     font-size: 20px;
     margin: 5px 0;
     transition: 0.5s;
@@ -80,7 +104,7 @@ label #sidebar_btn:hover{
     color:#5AC7C7;
 }
 #check:checked ~ .sidebar{
-    left: -200px;
+    left: -12.5%;
 }
 
 #check:checked ~ .sidebar a span{

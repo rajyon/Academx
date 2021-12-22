@@ -22,8 +22,9 @@
             </script>
         </div>
     </div>
+    
 <div class="container-fluid" style="background-color: white;height:100vh">
-<div style="background-color: white; width:84%;margin-left:16%;height:100%;padding-top:70px;margin-bottom:0;border: 5px solid #3F3F3F;">
+<div style="background-color: white; width:84%;margin-left:16%;height:100%;padding-top:70px;margin-bottom:0;border: 5px solid #3F3F3F;overflow: auto;">
                 <!-- content here -->
 </div>
  </div>

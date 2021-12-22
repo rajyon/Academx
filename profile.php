@@ -30,42 +30,11 @@ include 'imageProcess.php'
     </div>
 
     <div class="container-fluid" style="background-color: white;height:100vh">
-<div style="background-color: white; width:84%;margin-left:16%;height:100%;padding-top:70px;padding-left:10px;margin-bottom:0;border: 5px solid #3F3F3F;">
-    <form action="profile.php" method="post" enctype="multipart/form-data">
-                    <h3 class="text-center">Edit profile</h3>
+        <div style="  background-color: white;width:auto;margin-left:16%;height:100%;padding:150px;margin-bottom:0;border: 5px solid #3F3F3F;overflow: auto;">
 
-                    <?php if (!empty($msg)) : ?>
-                        <div class="alert  <?php echo $css_class; ?>">
-                            <?php echo $msg; ?>
-                        </div>
-                    <?php endif; ?>
+        </div>
+    </div>
 
-                    <div class="form-group text-center">
-                        <?php
-                        $username = $_SESSION['user_id'];
-                        $query = "SELECT * FROM users_img WHERE ID = '$username' LIMIT 1";
-                        $results = mysqli_query($conn, $query);
-
-                        if (mysqli_num_rows($results)) {
-                            $row = mysqli_fetch_assoc($results);
-                            $profileImage = $row['profile_image'];
-                            $profileBio = $row['bio'];
-                        }
-                        ?>
-                        <img src="<?php echo $profileImage; ?>" onclick="triggerClick()" id="profileDisplay" style="width: 150px;height: 150px; border-radius: 100px;margin-bottom: 10px;" />
-                        <label for="profileImage">Profile Image</label>
-                        <input type="file" name="profileImage" onchange="displayImage(this)" id="profileImage" style="display: none;">
-                    </div>
-                    <div class="form-group">
-                        <label for="bio">Bio</label>
-                        <textarea name="bio" id="bio" rclass="form-control"><?php echo $profileBio; ?></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" name="save-user" class="btn btn-primary btn-block">Save</button>
-                    </div>
-                </form>
-                </div>
-            </div>
 
 
 

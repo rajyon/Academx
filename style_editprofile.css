@@ -10,3 +10,14 @@
     margin: 10px auto;
     border-radius: 10%;
 }
+.contentx{
+    background-color: white;
+     width:auto;
+     margin-left:16%;
+     height:100%;
+     padding:70px;
+     margin-bottom:0;
+     border: 5px solid #3F3F3F;
+     overflow: auto;
+     
+  }

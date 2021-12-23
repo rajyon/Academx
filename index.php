@@ -36,8 +36,8 @@ if (isset($_POST["signup"])) {
     
     $sql = "INSERT INTO users_tbl (fname, lname, sex, age, email, username, password, contactnumber, token) 
             VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber','$token');
-            INSERT INTO users_img (ID) SELECT ID FROM users_tbl WHERE email='$email';
-            UPDATE users_img, users_tbl SET users_img.profile_image='img/default_img.png', users_img.bio='No bio.' WHERE users_img.ID=users_tbl.ID;";     
+            INSERT INTO users_img (ID) SELECT ID FROM users_tbl WHERE email='$email'";
+            // UPDATE users_img, users_tbl SET users_img.profile_image='img/default_img.png', users_img.bio='No bio.' WHERE users_img.ID=users_tbl.ID;";     
     $result = mysqli_multi_query($conn, $sql);
 
     if ($result) {

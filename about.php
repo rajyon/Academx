@@ -34,11 +34,11 @@ session_start();
   <h1>Acade<span>Mx</span></h1><br>
   <div class="row">
   <div class="box">
-  <h3 style="color: red;">MISSION</h3>
+  <h3 style="color: #5AC7C7;">MISSION</h3>
   To empower and give the student, alumni, organization, and university achieve more and give power to share and make the university more open and connected. 
   </div>
   <div class="box">
-  <h3 style="color: green;">VISION</h3>
+  <h3 style="color: #5AC7C7;">VISION</h3>
   AcadeMx sets the standards to create a transformative educational experience for students and alumuni focused on deep disciplinary knowledge; problem solving; leadership, communication, and interpersonal skills; and personal health and well-being.
   </div>
   </div>

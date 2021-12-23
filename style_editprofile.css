@@ -1,3 +1,9 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
 .form-div{
     margin-top: 100px;
     border: 1px solid #e0e0e0;
@@ -11,13 +17,16 @@
     border-radius: 10%;
 }
 .contentx{
-    background-color: white;
+    background-color: #EDEADE;
      width:auto;
      margin-left:16%;
      height:100%;
-     padding:70px;
+     padding-left:70px;
      margin-bottom:0;
      border: 5px solid #3F3F3F;
-     overflow: auto;
-     
+     padding-top: 100px;
+     padding-bottom: 25px;
   }
+  th, td {
+    padding-bottom: 15px;
+  } 

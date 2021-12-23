@@ -1,4 +1,8 @@
-
+<?php
+session_start();
+  if (!isset($_SESSION["user_id"])) {
+    header("Location: index.php");
+  }?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +16,7 @@
 </head>
 
 <body>
-
+ 
     <div>
         <script src="//code.jquery.com/jquery.min.js"></script>
         <div id="nav-placeholder">
@@ -27,7 +31,7 @@
     <div class="container-fluid" style="background-color: white;height:100vh;">
 <div class="contentx">
 <div class="about-section">
-  <h1 style=" text-transform: uppercase">Acade<span>Mx</span></h1><br>
+  <h1>Acade<span>Mx</span></h1><br>
   <div class="row">
   <div class="box">
   <h3 style="color: red;">MISSION</h3>
@@ -64,7 +68,7 @@
         <h2>Manzon, John Eduard</h2>
         <p class="title">Art Director</p>
         <p>BSIT Student at Technological University of the Phiilippines</p>
-        <p>mike@example.com</p>
+        <p>johneduard.manzon@tup.edu.ph</p>
         <p><button class="button">Contact</button></p>
       </div>
     </div>
@@ -101,6 +105,8 @@
 </div>
 </div>
  </div>
+ 
+
 </body>
 
 </html>

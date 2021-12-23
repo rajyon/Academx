@@ -25,8 +25,20 @@ body {
   span{
     color:#5AC7C7
   }
+  .contentx{
+    background-color:#EDEADE;
+     width:auto;
+     margin-left:16%;
+     height:100%;
+     padding:70px;
+     margin-bottom:0;
+     border: 5px solid #3F3F3F;
+     border-bottom: none;
+     overflow: auto;
+  }
+
   
-  .about-section {
+.about-section{
     padding: 50px;
     text-align: center;
     background-color: #343434;
@@ -73,16 +85,4 @@ body {
       width: 100%;
       display: block;
     }
-  }
-
-.contentx{
-    background-color: white;
-     width:auto;
-     margin-left:16%;
-     height:100%;
-     padding:70px;
-     margin-bottom:0;
-     border: 5px solid #3F3F3F;
-     overflow: auto;
-     
   }

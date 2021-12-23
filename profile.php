@@ -1,7 +1,28 @@
 <?php
 session_start();
 include 'config.php';
-include 'imageProcess.php'
+include 'imageProcess.php';
+if (!isset($_SESSION["user_id"])) {
+    header("Location: index.php");
+}
+$table_data = "";
+
+$FName = "";
+$LName = "";
+$Gender = "";
+$Age = "";
+$username = $_SESSION['user_id'];
+$query = "SELECT * FROM users_tbl WHERE ID = '$username' LIMIT 1";
+$results = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($results)) {
+    $row = mysqli_fetch_assoc($results);
+    $FName = $row['fname'];
+    $LName = $row['lname'];
+    $Sex = $row['sex'];
+    $Age = $row['age'];
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -28,10 +49,74 @@ include 'imageProcess.php'
             </script>
         </div>
     </div>
-
+    <br>
     <div class="container-fluid" style="background-color: white;height:100vh">
-        <div style="  background-color: white;width:auto;margin-left:16%;height:100%;padding:150px;margin-bottom:0;border: 5px solid #3F3F3F;overflow: auto;">
+        <div class="contentx">
+            <table class="content-table" style="width:95%; ">
+                <thead>
+                    <tr style="background-color: #555; color: #fff;">
+                        <th style="font-size: 17px;padding:15px">My Account</th>
+                        <th style="font-size: 17px;padding:15px">Data</th>
+                        <th style="font-size: 17px;padding:15px">Action</th>
+                    </tr>
+                    <tr style="background-color:#5AC7C7; color: black;">
+                        <th colspan="3" style="padding:5px">Personal Information</th>
+                    </tr>
+                   
+                    <tr>
+                        <td>First Name</td>
+                        <td><?php echo $FName ?></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><?php echo $LName ?></td>
+                    </tr>
+                    <tr>
+                        <td>Sex</td>
+                        <td><?php echo $Sex ?></td>
+                    </tr>
+                    <tr>
+                        <td>Age</td>
+                        <td><?php echo $Age ?></td>
+                    </tr>
+                    <tr style="background-color: #5AC7C7; color: black;">
+                        <th colspan="3" style="padding:5px">Profile Display</th>
+                    </tr>
+                    <tr>
+                        <td>Profile Picture</td>
+                    </tr>
+                    <tr>
+                        <td>Bio</td>
+                    </tr>
+                    <tr style="background-color: #5AC7C7; color: black;">
+                        <th colspan="3" style="padding:5px">Contact Information</th>
+                    </tr>
+                    <td>Email Address</td>
+                    </tr>
+                    <tr>
+                        <td>Contact Number</td>
+                    </tr>
+                    <tr style="background-color: #5AC7C7; color: black;">
+                        <th colspan="3" style="padding:5px">Security and Verification</th>
+                    </tr>
+                    <tr>
+                        <td>Username</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                    </tr>
+                    <tr>
+                        <td>Varification Status</td>
+                    </tr>
 
+                    </tr>
+                </thead>
+
+                <?php
+
+                echo  $table_data;
+
+                ?>
         </div>
     </div>
 

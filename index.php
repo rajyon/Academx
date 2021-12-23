@@ -5,7 +5,7 @@ session_start();
 
 error_reporting(0);
 if (isset($_SESSION["user_id"])) {
-  header("Location: home.php");
+  header("location: home.php");
 }
 
 if (isset($_POST["signup"])) {

@@ -6,29 +6,22 @@ if (!isset($_SESSION["user_id"])) {
     header("location: index.php");
 }
 date_default_timezone_set("Asia/Manila");
-if(isset($_POST['post_button'])){
-   
-  $PostId=uniqid("#");
-  $userId=$_SESSION['user_id'];
-  $title=$_POST['subject_post'];
-  $post_type=$_POST['type'];
-  $content=$_POST['content_post'];
-  $date= date("Y-m-d h:i:a");
 
-if ($post_type =='Public'){
-    $picture ='img/public.png';
-}else
-{
-    $picture ='img/org.png';
-}
-//Insertion to database      
-      $sql= "INSERT INTO post_tbl SET post_id='$PostId',userid='$userId',post_title='$title',post_type='$post_type',post_content='$content',post_date='$date',post_picture='$picture'";
-        
+if(isset($_POST['commentpost_button'])){
+
+  $postId=$_SESSION['post_id'];
+  $commenterId=$_SESSION['user_id'];
+  $date= date("Y-m-d h:i:a");
+  $commentContent=$_POST['comment_post'];
+  
+//Insertion to database       
+       $sql= "INSERT INTO comment_tbl (post_id, commenter_id, comment_date, comment_content) VALUES ('$postId', '$commenterId', '$date','$commentContent')";
+            
             if(!$conn->query($sql))
             {
              echo $conn->error;//getting the error 
             }else{
-                echo "<script>alert('Post Uploaded!');</script>";
+                echo "<script>alert('Comment Uploaded!');</script>";
                 mysqli_query($conn,$sql);
                
             }
@@ -43,8 +36,7 @@ if ($post_type =='Public'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style_home.css">
-    <link rel="stylesheet" href="style_cards.css">
+    <link rel="stylesheet" href="style_viewpost.css">
     <title>Home</title>
 </head>
 
@@ -64,9 +56,8 @@ if ($post_type =='Public'){
 <div class="container-fluid" style="background-color: white;height:100vh">
 <div class="contentx">
 
+<!-- for display of picture, name, post id, post date, post type -->
 <?php
-      
-
        if(isset($_GET['token']))
        {
          $ID = $_GET['token'];
@@ -116,23 +107,22 @@ if ($post_type =='Public'){
               </div>
               <br>
                 <form  name="frmInsertPost" method="post">
-                    <textarea readonly id ="subject_post" name ="subject_post" rows ="1" style = "width:40%; display:inline-block;"required><?php echo $row1['post_title'];?> </textarea>
-                    <textarea readonly id ="type" maxlength="50" name ="type" rows ="1" style = "width:20%; display:inline-block; border:none;"required>TYPE of POST:<?php echo $row1['post_type'];?></textarea>
-                    <br>
-                    <textarea readonly id ="content_post" name ="content_post" rows ="5" style ="width:100%; display:block;"required><?php echo $row1['post_content'];?></textarea>
+                    <textarea readonly id ="content_post" name ="content_post" rows ="11" style ="width:100%; display:block;"required>TITLE:                   <?php echo $row1['post_title'];?>&#13;&#10;TYPE OF POST:   <?php echo $row1['post_type'];?>&#13;&#10;POST ID:               <?php echo $row1['post_id'];?>&#13;&#10;DATE POSTED:    <?php echo $row1['post_date'];?>&#13;&#10;
+                    <?php echo $row1['post_content'];?>&#13;&#10;&#13;&#10;POSTED BY: <?php echo $profileName; ?></textarea>
                     <br>
                 </form>
-                <div>
-              <img style ="width:5%; height:5%; border-radius:5px" src="<?php echo $profileImage2; ?>" class="profile_image" alt=""><h2 style="color: white; padding-left:10px; display: inline-block; vertical-align: bottom;"><?php echo $username1; ?></h2>
               </div>
               <br>
-                <form  name="commentpost" method="post">
-                    <br>
-                    <textarea id ="content_post" name ="content_post" rows ="5" style ="width:100%; display:block;"required></textarea>
-                    <br>
-                </form>
-
+                  <h2 style="text-align:center; border-bottom: 2px solid red;">Comments Section</h2>
+               <div>
+                <h6 style="color: black; padding-left:10px; display: inline-block;">Commenting as: <?php echo $username1; ?></h6>
               </div>
+                <form  name="comment_post" method="post">
+                    <textarea maxlength="350" id ="comment_post" name ="comment_post" rows ="3" style ="width:100%; display:block;"required></textarea>
+                </form>
+        
+                <input id = "commentpost_button" name= "commentpost_button" type ="submit" value ="POST"/>
+            <br>
 </div> 
 </div>
 </div>

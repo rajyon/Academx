@@ -27,6 +27,78 @@ body{
      padding-top: 100px;
      padding-bottom: 25px;
   }
-  th, td {
-    padding-bottom: 15px;
-  } 
+  
+ .content-table tr td a{
+    
+    background-color: #4CAF50;
+    border: 2px solid black;
+    color: white;
+    text-decoration: none;
+    padding: 1px 50px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bolder;
+    margin: 1px 1px;
+    cursor: pointer;
+  }
+  .content-table tr td  a:hover{
+    background-color: white; 
+    color: #4CAF50; 
+    border: 2px solid #4CAF50;
+  }
+
+
+
+  .content-table tr td button~#save1{
+    background-color: blue; 
+    color: white; 
+  }
+  .content-table tr td button~#save1:hover{
+    background-color: white; 
+    color: blue; 
+    border: 2px solid blue;
+  }
+  .content-table form #cancel1{
+    background-color: #7B1324; 
+    color: white; 
+  }
+  .content-table tr td a~#cancel1:hover{
+    background-color: white; 
+    color: #7B1324; 
+    border: 2px solid #7B1324;
+  }
+  .content-table tr td a~#save2{
+    background-color: blue; 
+    color: white; 
+  }
+  .content-table tr td a~#save2:hover{
+    background-color: white; 
+    color: blue; 
+    border: 2px solid blue;
+  }
+  .content-table tr td a~#cancel2{
+    background-color: #7B1324; 
+    color: white; 
+  }
+  .content-table tr td a~#cancel2:hover{
+    background-color: white; 
+    color: #7B1324; 
+    border: 2px solid #7B1324;
+  }
+
+
+  .content-table th a{
+    text-decoration: none;
+    color: black;
+  }
+  
+  .content-table th a:hover{
+    color: #4CAF50;
+  }
+  
+  
+  #first_chk_bx:checked ~#first_list_bx{
+    display: none;
+}
+

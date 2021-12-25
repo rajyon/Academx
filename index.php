@@ -36,10 +36,10 @@ if (isset($_POST["signup"])) {
     
     $sql = "INSERT INTO users_tbl (fname, lname, sex, age, email, username, password, contactnumber, token) 
             VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber','$token');
-            INSERT INTO users_img (ID) SELECT ID FROM users_tbl WHERE email='$email'";
-            // UPDATE users_img, users_tbl SET users_img.profile_image='img/default_img.png', users_img.bio='No bio.' WHERE users_img.ID=users_tbl.ID;";     
+            INSERT INTO  users_img SET profile_image='img/default.png',bio='No bio.', ID =(SELECT ID FROM users_tbl WHERE email='$email');";
+           
     $result = mysqli_multi_query($conn, $sql);
-
+   
     if ($result) {
       $_POST["regis_fname"] = "";
       $_POST["regis_lname"] = "";
@@ -51,7 +51,7 @@ if (isset($_POST["signup"])) {
       $_POST["regis_cpassword"] = "";
       $_POST["regis_contactnumber"] = "";
       echo "<script>alert('User registered.');</script>";
-    }else{
+  }else{
       echo "<script>alert('User registration failed');</script>";
      
     }
@@ -93,7 +93,7 @@ if (isset($_POST["login"])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style_index.css" />
-  <title>Log in and Registration</title>
+  <title>AcadeMx</title>
 </head>
 
 <body>

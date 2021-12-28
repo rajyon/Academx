@@ -15,7 +15,10 @@ body{
      overflow: auto;
      
   }
-
+  .column {
+    width: 100%;
+    margin-bottom: 16px;
+  }
 
 textarea{
     border:solid 1px black;
@@ -25,6 +28,17 @@ textarea{
     padding: 14px;
     border-radius: 5px;
 }
+input{
+    background-color: #5AC7C7;
+    border:solid 1px black;
+    color:black;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 2px;
+    width: 100px;
+    height: 50px;
+}
+
 #comment_post{
     border:solid 1px black;
     font-family: "Poppins", sans-serif;
@@ -33,9 +47,25 @@ textarea{
     margin-bottom: 5px;
     border-radius: 10px;
 }
-
+#comment_show{
+  border:solid 3px black;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  padding: 14px;
+  border-radius: 10px;
+}
 
   #commentpost_button{
+    float:right;
+    background-color: #5AC7C7;
+    border:none;
+    border:solid 1px black;
+    font-size: 14px;
+    border-radius: 2px;
+    width: 100px;
+    height: 30px;
+  }
+  #like_button{
     float:right;
     background-color: #5AC7C7;
     border:none;

@@ -5,7 +5,7 @@ body{
 }
 
 .contentx{
-    background-color:#EDEADE;
+    background-color: #EDEADE;
      width:auto;
      margin-left:16%;
      height:100%;
@@ -13,5 +13,4 @@ body{
      margin-bottom:0;
      border: 5px solid #3F3F3F;
      overflow: auto;
-     
-  }
+}

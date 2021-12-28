@@ -28,7 +28,11 @@ textarea{
       border-radius: 5px;
       
   }
+#text_area_remain{
+  color: white;
+  font-size: 17px;
 
+}
   #post_button{
     float:right;
     background-color: #5AC7C7;

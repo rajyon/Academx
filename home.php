@@ -41,10 +41,9 @@ if ($post_type =='Public'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style_home.css">
-    <link rel="stylesheet" href="style_cards.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style_home.css"/>
+    <link rel="stylesheet" href="style_cards.css"/>
     <title>Home</title>
 </head>
 
@@ -78,17 +77,30 @@ if ($post_type =='Public'){
                 <textarea id ="subject_post" maxlength="50" name ="subject_post" placeholder="Subject or Title" rows ="1" style = "width:100%; display:block;" required ></textarea>
                 <br>
                 <textarea id ="content_post" maxlength="350" name ="content_post" placeholder="What do you think?" rows ="5" style ="width:100%; display:block;"required></textarea>
-                <br>
+                <div id = "text_area_remain">350 Characters Remaining</div>
+                    
+                    <script>
+                        const myTextArea = document.getElementById('content_post');
+                        const remainingChars = document.getElementById('text_area_remain');
+                        const MAX_CHARS = 350;
+
+                        myTextArea.addEventListener('input', ()=> {
+                            const remaining = MAX_CHARS - myTextArea.value.length;
+                            const color = remaining < MAX_CHARS * 0.1 ? 'red' : null;
+                            remainingChars.textContent = `${remaining} Characters Remaining`;
+                            remainingChars.style.color = color;
+                        });
+                    </script>
+        
                 <input id = "post_button" name= "post_button" type ="submit" value ="POST"/>
                 <br><br>
             </form>
             </div>
             </div>
-            <h2 style="text-align:center; border-bottom: 2px solid red;">Posts</h2>
-            <br>
             
+            <h2 style="text-align:center; border-bottom: 2px solid red;">Posts</h2>
+            <br>  
             <div class="row">
-               
                <?php
                     $sql= "SELECT * FROM post_tbl ORDER BY post_date DESC";
                     $result = $conn->query($sql);
@@ -106,8 +118,8 @@ if ($post_type =='Public'){
                                 <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">'.$row['post_content'].'</p>
                             </div>
                             <div class ="card_info">
-                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                <i class="fas fa-thumbs-up fa-xl">  Like</i>   
+                                <i class="fas fa-thumbs-down fa-xl">  Dislike</i>
                                 <a href="viewpost.php?token='.$row['post_id'].'" class ="card_link">View Article</a>
                             </div>
                             </div>

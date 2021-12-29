@@ -36,7 +36,7 @@ session_start();
 <div class="container-fluid" style="background-color: white;height:100vh">
 <div class="contentx">
   
-<h2 style="text-align:center; border-bottom: 2px solid red;">My Posts</h2>
+<h2 style="text-align:center; border-top: 5px solid #7B1324; border-bottom: 5px solid #7B1324;  border-radius: 5px;">My Posts</h2>
             <br>  
             <div class="row">         
                <?php
@@ -51,20 +51,34 @@ session_start();
                             <img src="'.$row['post_picture'].'" alt="" style="width:100%">    
                             <div class="container">
                             <br>
-                                <h9>'.$row['post_date'].'<br>'.'Post ID'.'<h9>'.$row['post_id'].'</h9 >
+                                <h8 style ="color:gray; font-weight: bold;">Date: </h8>
+                                <h9>'.$row['post_date'].'<br>'.'
+                                <h8 style ="color:gray; font-weight: bold;">Post ID: </h8>'.'
+                                <h9>'.$row['post_id'].'</h9>
+                                <hr style= "border-top: 5px solid #cccc;"></hr>
                                 <h2>'.$row['post_title'].'</h2>
                                 <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">'.$row['post_content'].'</p>
                             </div>
                             <div class ="card_info">
-                                <i class="fas fa-thumbs-up fa-xl"><span>Like</span></i>   
-                                <i class="fas fa-thumbs-down fa-xl"><span>Dislike</span></i>
+                                <i class="fas fa-thumbs-up fa-xl"><span></span></i>   
+                                <i class="fas fa-thumbs-down fa-xl"><span></span></i>
                                 <a href="viewpost.php?token='.$row['post_id'].'" class ="card_link">View Article</a>
-                                <a href="delete.php?token='. $row['post_id'] .'" class="card_link" > Delete </a>
+                                <a href="delete.php?token='. $row['post_id'] .'" class="card_link" style= "color:red"> Delete </a>
                                 </div>
                             </div>
-                    </div>'; 
+                    </div>';
                     }
-                ?> 
+               ?> 
+               <script type="text/javascript">
+                    var elems = document.getElementsByClassName('card_link');
+                    var confirmIt = function (e) {
+                        if (!confirm('Are you sure?')) e.preventDefault();
+                    };
+                    for (var i = 0, l = elems.length; i < l; i++) {
+                        elems[i].addEventListener('click', confirmIt, false);
+                    }
+                </script>
+
        
             </div>
 </div>

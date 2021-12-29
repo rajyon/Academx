@@ -144,8 +144,8 @@ if(isset($_POST['commentpost_button'])){
                     <textarea readonly id ="content_post" name ="content_post" rows ="11" style ="width:100%; display:block;"required>TITLE:                   <?php echo $row1['post_title'];?>&#13;&#10;TYPE OF POST:   <?php echo $row1['post_type'];?>&#13;&#10;POST ID:               <?php echo $row1['post_id'];?>&#13;&#10;DATE POSTED:    <?php echo $row1['post_date'];?>&#13;&#10;
                     <?php echo $row1['post_content'];?></textarea>
                     <br>
-                    <input id = "like_button" name= "like_button" type ="submit" value ="Like"/>
-                    <input id = "dislike_button" name= "dislike_button" type ="submit" value ="Dislike"/>
+                    <input id = "like_button" name= "like_button" type ="submit" value ="Like"> <p style="color: white; display: inline;">0</p>
+                    <input id = "dislike_button" name= "dislike_button" type ="submit" value ="Dislike"/> <p style="color: white; display: inline;">0</p>
                 </form>
               </div>
               <br>

@@ -26,7 +26,7 @@ if ($post_type =='Public'){
         
             if(!$conn->query($sql))
             {
-             echo $conn->error;//getting the error 
+                echo "<script>alert('Post Not Uploaded Please try again!!');</script>";
             }else{
                 echo "<script>alert('Post Uploaded!');</script>";
                 mysqli_query($conn,$sql);
@@ -34,6 +34,7 @@ if ($post_type =='Public'){
             }
         }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,12 +74,11 @@ if ($post_type =='Public'){
                 <option value="Public">Public</option>
                 <option value="Organization Club">Organization/Club</option>
                 </select>
-
-                <textarea id ="subject_post" maxlength="50" name ="subject_post" placeholder="Subject or Title" rows ="1" style = "width:100%; display:block;" required ></textarea>
+                <textarea id ="subject_post" maxlength="50" name ="subject_post" placeholder="Subject or Title" rows ="1" style = "width:100%; display:block; " required ></textarea>
                 <br>
                 <textarea id ="content_post" maxlength="350" name ="content_post" placeholder="What do you think?" rows ="5" style ="width:100%; display:block;"required></textarea>
                 <div id = "text_area_remain">350 Characters Remaining</div>
-                    
+
                     <script>
                         const myTextArea = document.getElementById('content_post');
                         const remainingChars = document.getElementById('text_area_remain');
@@ -98,7 +98,7 @@ if ($post_type =='Public'){
             </div>
             </div>
             
-            <h2 style="text-align:center; border-bottom: 2px solid red;">Posts</h2>
+            <h2 style="text-align:center; border-top: 5px solid #7B1324; border-bottom: 5px solid #7B1324;  border-radius: 5px;">Posts</h2>
             <br>  
             <div class="row">
                <?php
@@ -113,13 +113,17 @@ if ($post_type =='Public'){
                             <img src="'.$row['post_picture'].'" alt="" style="width:100%">    
                             <div class="container">
                             <br>
-                                <h9>'.$row['post_date'].'<br>'.'Post ID'.'<h9>'.$row['post_id'].'</h9 >
+                                <h8 style ="color:gray; font-weight: bold;">Date: </h8>
+                                <h9>'.$row['post_date'].'<br>'.'
+                                <h8 style ="color:gray; font-weight: bold;">Post ID: </h8>'.'
+                                <h9>'.$row['post_id'].'</h9>
+                                <hr style= "border-top: 5px solid #cccc;"></hr>
                                 <h2>'.$row['post_title'].'</h2>
                                 <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">'.$row['post_content'].'</p>
                             </div>
                             <div class ="card_info">
-                                <i class="fas fa-thumbs-up fa-xl">  Like</i>   
-                                <i class="fas fa-thumbs-down fa-xl">  Dislike</i>
+                                <i class="fas fa-thumbs-up fa-xl"> </i>   
+                                <i class="fas fa-thumbs-down fa-xl"> </i>
                                 <a href="viewpost.php?token='.$row['post_id'].'" class ="card_link">View Article</a>
                             </div>
                             </div>

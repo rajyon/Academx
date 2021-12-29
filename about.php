@@ -44,7 +44,7 @@ session_start();
   </div>
 </div>
 <br>
-<h2 style="text-align:center">Our Team</h2>
+<h2 style="text-align:center; border-top: 5px solid #7B1324; border-bottom: 5px solid #7B1324;  border-radius: 5px;">Our Team</h2>
 <div class="row">
   <div class="column">
     <div class="card">

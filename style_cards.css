@@ -33,7 +33,7 @@
      border-bottom: none;
      overflow: auto;
   }
-
+ 
   .container {
     padding: 0 16px;
   }
@@ -53,11 +53,12 @@
   }
   .card_info{
       padding: 15px;
-      display: flex;
+      display:flex;
       justify-content: space-between;
       background: #eeeeee;
-      font-size: 10px;
+      font-size: 12px;
       border-bottom: 2px solid #cccccc;
+      align-items: center;
   }
 
 

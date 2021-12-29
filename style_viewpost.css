@@ -56,7 +56,6 @@ input{
 }
 
   #commentpost_button{
-    float:right;
     background-color: #5AC7C7;
     border:none;
     border:solid 1px black;
@@ -64,9 +63,9 @@ input{
     border-radius: 2px;
     width: 100px;
     height: 30px;
+    float: right;
   }
   #like_button{
-    float:right;
     background-color: #5AC7C7;
     border:none;
     border:solid 1px black;
@@ -75,4 +74,14 @@ input{
     width: 100px;
     height: 30px;
   }
+  #dislike_button{
+    background-color: #5AC7C7;
+    border:none;
+    border:solid 1px black;
+    font-size: 14px;
+    border-radius: 2px;
+    width: 100px;
+    height: 30px;
+  }
+
   

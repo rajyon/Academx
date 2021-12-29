@@ -52,12 +52,13 @@
     padding: 0 8px;
   }
   .card_info{
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      background: #eeeeee;
-      font-size: 10px;
-      border-bottom: 2px solid #cccccc;
+    padding: 15px;
+    display:flex;
+    justify-content: space-between;
+    background: #eeeeee;
+    font-size: 12px;
+    border-bottom: 2px solid #cccccc;
+    align-items: center;
   }
 
 

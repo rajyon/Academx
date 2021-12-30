@@ -62,7 +62,7 @@ session_start();
                             <div class ="card_info">
                                 <i class="fas fa-thumbs-up fa-xl"><span></span></i>   
                                 <i class="fas fa-thumbs-down fa-xl"><span></span></i>
-                                <a href="viewpost.php?token='.$row['post_id'].'" class ="card_link">View Article</a>
+                                <a href="viewpost.php?token='.$row['post_id'].'" class ="card_link1">View Article</a>
                                 <a href="delete.php?token='. $row['post_id'] .'" class="card_link" style= "color:red"> Delete </a>
                                 </div>
                             </div>

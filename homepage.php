@@ -24,8 +24,7 @@ if (!isset($_SESSION["user_id"])) {
     <div class="master">
     <input type="checkbox" id="check">
     <header>
-        <label for="check"><i class="fas fa-bars" id="sidebar_btn"></i></label> <div class="left_area1"><h3>Acade<span>Mx</span></h3></div>
-       
+        <label for="check"><i class="fas fa-bars" id="sidebar_btn"></i></label><div class="left_area1"><h3>Acade<span>Mx</span></h3></div>
     </header>
     <div class="sidebar">
         <center>
@@ -50,6 +49,7 @@ if (!isset($_SESSION["user_id"])) {
                 $row = mysqli_fetch_assoc($results);
                 $profileName = $row['fname'] . ' ' . $row['lname'];
             }
+            $_SESSION['Profile_Name']=$profileName;
             ?>
             <h4><?php echo $profileName; ?></h4>
             <?php
@@ -67,7 +67,8 @@ if (!isset($_SESSION["user_id"])) {
         </center>
         <a href="home.php"><i class="fas fa-home"></i><span>Home</span></a>
         <a href="profile.php"><i class="far fa-address-card"></i><span>Profile</span></a>
-        <a href="myposts.php#"><i class="far fa-sticky-note"></i><span>My Posts</span></a>
+        <a href="myposts.php"><i class="far fa-sticky-note"></i><span>My Posts</span></a>
+        <a href="group.php"><i class="fas fa-users"></i><span>Group</span></a>
         <a href="about.php"><i class="fas fa-info-circle"></i><span>About Us</span></a>
         <div style="vertical-align: sub;">
         <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>

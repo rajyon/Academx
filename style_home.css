@@ -43,9 +43,6 @@ textarea{
     border-radius: 2px;
     width: 100px;
     height: 50px;
-    transition: 0.5s;
-    transition-property: background;
-    
   }
   #post_button:hover{
     background: #3F3F3F;

@@ -38,7 +38,7 @@ if(isset($_POST['commentpost_button'])){
                 $likeamount=$row['like_amount'];
                 $likeamount++;
         $update_like="UPDATE post_tbl SET like_amount = '$likeamount' WHERE post_id ='$postId'";
-        
+        mysqli_query($conn, $update_like);
         }
     }
         

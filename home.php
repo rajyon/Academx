@@ -2,18 +2,22 @@
 require 'config.php';
 session_start();
 
+
 if (!isset($_SESSION["user_id"])) {
     header("location: index.php");
 }
 date_default_timezone_set("Asia/Manila");
+$to_filter = 'All';
+
 if (isset($_POST['post_button'])) {
 
     $PostId = uniqid("");
     $userId = $_SESSION['user_id'];
     $title = $_POST['subject_post'];
     $post_type = $_POST['type'];
+    $post_group = $_POST['group'];
     $content = $_POST['content_post'];
-    $date = date("Y-m-d h:i:a");
+    $date = date("Y-m-d  [h:i A]");
 
     if ($post_type == 'Public') {
         $picture = 'img/public.png';
@@ -21,7 +25,7 @@ if (isset($_POST['post_button'])) {
         $picture = 'img/org.png';
     }
     //Insertion to database      
-    $sql = "INSERT INTO post_tbl SET post_id='$PostId',userid='$userId',post_title='$title',post_type='$post_type',post_content='$content',post_date='$date',post_picture='$picture'";
+    $sql = "INSERT INTO post_tbl SET post_id='$PostId',userid='$userId',post_title='$title',post_type='$post_type', post_group = '$post_group', post_content='$content',post_date='$date',post_picture='$picture'";
 
     if (!$conn->query($sql)) {
         echo "<script>alert('Post Not Uploaded Please try again!!');</script>";
@@ -30,6 +34,28 @@ if (isset($_POST['post_button'])) {
         mysqli_query($conn, $sql);
     }
 }
+
+if (isset($_POST['filter'])) {
+    $to_filter = $_POST['group_filter'];
+}
+
+
+$user = $_SESSION['user_id'];
+$group_names = array();
+$sql = "SELECT * FROM group_transac WHERE member_ID = '$user'";
+
+if ($result = $conn->query($sql)) {
+    while ($row = $result->fetch_assoc()) {
+        $item = $row['group_code'];
+        $sql1 = "SELECT * FROM group_tbl WHERE group_code = '$item'";
+        $result2 = mysqli_query($conn, $sql1);
+        $row1 = $result2->fetch_assoc();
+        $item2 = $row1['group_name'];
+        array_push($group_names, $item2);
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +68,7 @@ if (isset($_POST['post_button'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <link rel="stylesheet" href="style_home.css" />
     <link rel="stylesheet" href="style_cards.css" />
+    <link rel="stylesheet" href="style_search.css" />
     <title>Home</title>
 </head>
 
@@ -60,9 +87,7 @@ if (isset($_POST['post_button'])) {
 
     <div class="container-fluid" style="background-color: white;height:100vh">
         <div class="contentx">
-
             <div style="min-height: 400px; flex:2.5; padding:20px;">
-
                 <div style="border:solid thin #aaa; padding: 20px; background-color:#3F3F3F;">
                     <form name="frmInsertPost" method="post">
 
@@ -71,11 +96,16 @@ if (isset($_POST['post_button'])) {
                             <option value="Public">Public</option>
                             <option value="Organization Club">Organization/Club</option>
                         </select>
-                    
+
                         <label for="group" style="margin-bottom:15px; color:white;">Group:</label>
                         <select name="group" id="group">
                             <option value="Public">Public</option>
-                            <option value="Organization Club">Organization/Club</option>
+                            <?php
+                            foreach ($group_names as $gname) {
+                                $selected = ($options == $gname) ? "selected" : "";
+                                echo '<option ' . $selected . ' value="' . $gname . '">' . $gname . '</option>';
+                            }
+                            ?>
                         </select>
 
 
@@ -105,10 +135,42 @@ if (isset($_POST['post_button'])) {
 
             <h2 style="text-align:center; border-top: 5px solid #7B1324; border-bottom: 5px solid #7B1324;  border-radius: 5px;">Posts</h2>
             <br>
+            <div style=" display:flex; justify-content:space-between; border:2px solid #ccc!important; padding-right:5px">
+            <div class="search-container">
+                <form action="/search" method="get">
+                    <input class="search" id="searchleft" type="search" name="q" placeholder="Search">
+                    <label class="button searchbutton" for="searchleft"><span class="mglass">&#9906;</span></label>
+                </form>
+            </div>
+            <div style=" display: flex;align-items: center;justify-content: center;">
+            <form name="frmFilter" method="post">
+                <label for="group_filter" style=" color:black;">Filter:</label>
+                <select name="group_filter" id="group_filter">
+                    <option value="All">All</option>
+                    <option value="Public">Public</option>
+                    <?php
+                    foreach ($group_names as $gname) {
+                        echo '<option value="' . $gname . '"> ' . $gname . '</option>';
+                    }
+                    ?>
+                </select>
+                <input name="filter" type="submit" value="Filter" />
+            </form>
+            </div>
+            </div>
+            <br>
             <div class="row">
                 <?php
-                $sql = "SELECT * FROM post_tbl ORDER BY post_date DESC";
+
+                if ($to_filter == 'All') {
+
+                    $sql = "SELECT * FROM post_tbl ORDER BY post_date DESC ";
+                } else {
+                    echo "<div class='alert alert-dark' style='text-align:center;font-size:16px;font-weight:bold'>$to_filter</div>";
+                    $sql = "SELECT * FROM post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC ";
+                }
                 $result = $conn->query($sql);
+
 
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '

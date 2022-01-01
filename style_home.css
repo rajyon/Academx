@@ -33,21 +33,21 @@ textarea{
   font-size: 17px;
 
 }
-  #post_button{
+  /* #post_button{
     float:right;
     background-color: #5AC7C7;
     border:solid 1px black;
     color:black;
     font-size: 14px;
     font-weight: bold;
-    border-radius: 2px;
+    border-radius: 5px;
     width: 100px;
     height: 50px;
-  }
+  } */
   #post_button:hover{
     background: #3F3F3F;
     color:white;
-    
+    border:solid 1px #5AC7C7;
   }
   
   

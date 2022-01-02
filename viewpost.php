@@ -90,50 +90,74 @@ if(isset($_POST['commentpost_button'])){
 
 <!-- for display of picture, name, post id, post date, post type -->
 <?php
+$checker=0;
+$gchecker='A';
+$sqlx = "";
+$post_group = "";
+$useID=$_SESSION['user_id'];
        if(isset($_GET['token']))
        {
          $ID = $_GET['token'];
          $sql = "SELECT * FROM post_tbl WHERE post_id = '$ID'";
          $result1 = $conn->query($sql);
-         $row1 = mysqli_fetch_assoc($result1);
+         if(mysqli_num_rows($result1)>0){
+            $row1 = mysqli_fetch_assoc($result1);
+            $post_group = $row1['post_group'];
+            $post_code = "";
+            $presqlx = "SELECT * FROM group_tbl WHERE group_name = '$post_group'";
+            $preresult6 = mysqli_query($conn,$presqlx);
+            if (mysqli_num_rows($preresult6)) {
+                $prerow = mysqli_fetch_assoc($preresult6);
+                $post_code = $prerow['group_code'];
+            }
+            $sqlx = "SELECT * FROM group_transac WHERE member_ID = '$useID' AND group_code = '$post_code'";
+            $idofuser = $row1['userid'];
+            $query = "SELECT * FROM users_img WHERE ID = '$idofuser' LIMIT 1";
+            $results2 = mysqli_query($conn, $query);
+            if (mysqli_num_rows($results2)) {
+                $row2 = mysqli_fetch_assoc($results2);
+                $profileImage = $row2['profile_image'];
+            }
+            $profileName = "";
+            $query = "SELECT * FROM users_tbl WHERE ID = '$idofuser' LIMIT 1";
+            $results3 = mysqli_query($conn, $query);
+       
+            if (mysqli_num_rows($results3)) {
+                $row3 = mysqli_fetch_assoc($results3);
+                $profileName = $row3['fname'] . ' ' . $row3['lname'];
+            }
+            $username1 = $_SESSION['user_id'];
+            $query = "SELECT * FROM users_tbl WHERE ID = '$username1' LIMIT 1";
+            $results4 = mysqli_query($conn, $query);
+       
+            if (mysqli_num_rows($results4)) {
+                $row4 = mysqli_fetch_assoc($results4);
+                $username1 = $row4['fname'] . ' ' . $row4['lname'];
+            }
+            $username2 = $_SESSION['user_id'];
+            $query = "SELECT * FROM users_img WHERE ID = '$username2' LIMIT 1";
+            $results5 = mysqli_query($conn, $query);
+            if (mysqli_num_rows($results5)) {
+                $row5 = mysqli_fetch_assoc($results5);
+                $profileImage2 = $row5['profile_image'];
+            }
+            if($post_group!='Public'){
+                $results6 = mysqli_query($conn, $sqlx);
+            if(!mysqli_num_rows($results6)>0){
+                $gchecker = 'B';
+            }
+            }
+
+         }else{
+            $checker++;
+            echo "<div class='alert alert-danger'>Post not found!</div>";
+         }
+         
        }
-      $idofuser = $row1['userid'];
-      $query = "SELECT * FROM users_img WHERE ID = '$idofuser' LIMIT 1";
-      $results2 = mysqli_query($conn, $query);
-
-      if (mysqli_num_rows($results2)) {
-          $row2 = mysqli_fetch_assoc($results2);
-          $profileImage = $row2['profile_image'];
-      }
-     $profileName = "";
-     $query = "SELECT * FROM users_tbl WHERE ID = '$idofuser' LIMIT 1";
-     $results3 = mysqli_query($conn, $query);
-
-     if (mysqli_num_rows($results3)) {
-         $row3 = mysqli_fetch_assoc($results3);
-         $profileName = $row3['fname'] . ' ' . $row3['lname'];
-     }
-     $username1 = $_SESSION['user_id'];
-     $query = "SELECT * FROM users_tbl WHERE ID = '$username1' LIMIT 1";
-     $results4 = mysqli_query($conn, $query);
-
-     if (mysqli_num_rows($results4)) {
-         $row4 = mysqli_fetch_assoc($results4);
-         $username1 = $row4['fname'] . ' ' . $row4['lname'];
-     }
-     $username2 = $_SESSION['user_id'];
-     $query = "SELECT * FROM users_img WHERE ID = '$username2' LIMIT 1";
-     $results5 = mysqli_query($conn, $query);
-     if (mysqli_num_rows($results5)) {
-         $row5 = mysqli_fetch_assoc($results5);
-         $profileImage2 = $row5['profile_image'];
-     }
-     
-
 ?>
  
 
-<div style = "min-height: 400px; flex:2.5; padding:20px;">
+<div <?php if ($checker!=0){?>style="display:none"<?php }?> style = "min-height: 400px; flex:2.5; padding:20px;" >
               <div style = "border:solid thin #aaa; padding: 20px; background-color:#3F3F3F;">
               
               <div>
@@ -141,7 +165,8 @@ if(isset($_POST['commentpost_button'])){
               </div>
               <br>
                 <form  name="frmInsertPost" method="post">
-                    <textarea readonly id ="content_post" name ="content_post" rows ="11" style ="width:100%; display:block;"required>TITLE:                   <?php echo $row1['post_title'];?>&#13;&#10;TYPE OF POST:   <?php echo $row1['post_type'];?>&#13;&#10;POST ID:               <?php echo $row1['post_id'];?>&#13;&#10;DATE POSTED:    <?php echo $row1['post_date'];?>&#13;&#10;
+                    <textarea readonly id ="content_post" name ="content_post" rows ="11" style ="width:100%; display:block;"required>TITLE:                   <?php echo $row1['post_title'];?>&#13;&#10;TYPE OF POST:   <?php echo $row1['post_type'];?>&#13;&#10;POST ID:               <?php echo $row1['post_id'];?>&#13;&#10;DATE POSTED:    <?php echo $row1['post_date'];?>&#13;
+__________________________________________________________________________________________________
                     <?php echo $row1['post_content'];?></textarea>
                     <br>
                     <input id = "like_button" name= "like_button" type ="submit" value ="Like"> <p style="color: white; display: inline;">0</p>
@@ -150,7 +175,7 @@ if(isset($_POST['commentpost_button'])){
               </div>
               <br>
                   <h2 style="text-align:center; border-bottom: 2px solid red;">Comments Section</h2>
-                  <div style = "border:solid thin #aaa; padding: 10px; padding-bottom:4px; background-color:none;">
+                  <div <?php if ($gchecker == 'B'){?>style="display:none"<?php }?> style = "border:solid thin #aaa; padding: 10px; padding-bottom:4px; background-color:none;">
                 <div>
                     <h6 style="color: black; padding-left:10px; display: inline-block;">Commenting as: <?php echo $username1; ?></h6>
                 </div>
@@ -177,8 +202,9 @@ if(isset($_POST['commentpost_button'])){
                 </div>
                 <br>
             </div>
-            <div style = "border:solid thin #aaa; padding: 10px; background-color:none;">
+            <div <?php if ($checker!=0 || $gchecker == 'B'){ echo 'style="display:none"';}?> style = "border:solid thin #aaa; padding: 10px; background-color:none;">
             <?php
+               
                     $commenter_id = $_SESSION['user_id'];
                     $postId=$_GET['token'];
                     $query ="SELECT * FROM comment_tbl WHERE post_id = '$postId'";

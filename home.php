@@ -16,6 +16,7 @@ if (isset($_POST['post_button'])) {
     $title = $_POST['subject_post'];
     $post_type = $_POST['type'];
     $post_group = $_POST['group'];
+    
     $content = $_POST['content_post'];
     $date = date("Y-m-d  [h:i A]");
 
@@ -101,9 +102,11 @@ if ($result = $conn->query($sql)) {
                         <select name="group" id="group">
                             <option value="Public">Public</option>
                             <?php
+                            $group_list = [];
                             foreach ($group_names as $gname) {
                                 $selected = ($options == $gname) ? "selected" : "";
                                 echo '<option ' . $selected . ' value="' . $gname . '">' . $gname . '</option>';
+                                array_push($group_list,$gname);
                             }
                             ?>
                         </select>
@@ -137,8 +140,8 @@ if ($result = $conn->query($sql)) {
             <br>
             <div style=" display:flex; justify-content:space-between; border:2px solid #ccc!important; padding-right:5px">
             <div class="search-container">
-                <form action="/search" method="get">
-                    <input class="search" id="searchleft" type="search" name="q" placeholder="Search">
+                <form action="viewpost.php" method="get">
+                    <input class="search" id="searchleft" type="search" name="token" placeholder="Search for Post ID" required>
                     <label class="button searchbutton" for="searchleft"><span class="mglass">&#9906;</span></label>
                 </form>
             </div>
@@ -161,40 +164,73 @@ if ($result = $conn->query($sql)) {
             <br>
             <div class="row">
                 <?php
-
                 if ($to_filter == 'All') {
+                    $display = "";
+                    array_push($group_list,'Public');
+                    foreach ($group_list as $to_filter){
+                        $sql = "SELECT * FROM post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC; ";
+                        $result = $conn->query($sql);
 
-                    $sql = "SELECT * FROM post_tbl ORDER BY post_date DESC ";
+             
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $display .= '
+                               <div class="column">
+                                    <div class="card">
+                                    <img src="' . $row['post_picture'] . '" alt="" style="width:100%">    
+                                    <div class="container">
+                                    <br>
+                                        <h8 style ="color:gray; font-weight: bold;">Date: </h8>
+                                        <h9>' . $row['post_date'] . '<br>' . '
+                                        <h8 style ="color:gray; font-weight: bold;">Post ID: </h8>' . '
+                                        <h9>' . $row['post_id'] . '</h9>
+                                        <hr style= "border-top: 5px solid #cccc;"></hr>
+                                        <h2>' . $row['post_title'] . '</h2>
+                                        <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">' . $row['post_content'] . '</p>
+                                    </div>
+                                    <div class ="card_info">
+                                        <i class="fas fa-thumbs-up fa-xl"> </i>   
+                                        <i class="fas fa-thumbs-down fa-xl"> </i>
+                                        <a href="viewpost.php?token=' . $row['post_id'] . '" class ="card_link">View Article</a>
+                                    </div>
+                                    </div>
+                            </div>';
+                        }
+                    }  
+                   
+                    echo $display;     
+                           
                 } else {
                     echo "<div class='alert alert-dark' style='text-align:center;font-size:16px;font-weight:bold'>$to_filter</div>";
                     $sql = "SELECT * FROM post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC ";
-                }
-                $result = $conn->query($sql);
+                    $result = $conn->query($sql);
 
-
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '
-                       <div class="column">
-                            <div class="card">
-                            <img src="' . $row['post_picture'] . '" alt="" style="width:100%">    
-                            <div class="container">
-                            <br>
-                                <h8 style ="color:gray; font-weight: bold;">Date: </h8>
-                                <h9>' . $row['post_date'] . '<br>' . '
-                                <h8 style ="color:gray; font-weight: bold;">Post ID: </h8>' . '
-                                <h9>' . $row['post_id'] . '</h9>
-                                <hr style= "border-top: 5px solid #cccc;"></hr>
-                                <h2>' . $row['post_title'] . '</h2>
-                                <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">' . $row['post_content'] . '</p>
-                            </div>
-                            <div class ="card_info">
-                                <i class="fas fa-thumbs-up fa-xl"> </i>   
-                                <i class="fas fa-thumbs-down fa-xl"> </i>
-                                <a href="viewpost.php?token=' . $row['post_id'] . '" class ="card_link">View Article</a>
-                            </div>
-                            </div>
-                    </div>';
+             
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo '
+                           <div class="column">
+                                <div class="card">
+                                <img src="' . $row['post_picture'] . '" alt="" style="width:100%">    
+                                <div class="container">
+                                <br>
+                                    <h8 style ="color:gray; font-weight: bold;">Date: </h8>
+                                    <h9>' . $row['post_date'] . '<br>' . '
+                                    <h8 style ="color:gray; font-weight: bold;">Post ID: </h8>' . '
+                                    <h9>' . $row['post_id'] . '</h9>
+                                    <hr style= "border-top: 5px solid #cccc;"></hr>
+                                    <h2>' . $row['post_title'] . '</h2>
+                                    <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">' . $row['post_content'] . '</p>
+                                </div>
+                                <div class ="card_info">
+                                    <i class="fas fa-thumbs-up fa-xl"> </i>   
+                                    <i class="fas fa-thumbs-down fa-xl"> </i>
+                                    <a href="viewpost.php?token=' . $row['post_id'] . '" class ="card_link">View Article</a>
+                                </div>
+                                </div>
+                        </div>';
+                    }
                 }
+                
+               
                 ?>
 
 

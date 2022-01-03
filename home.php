@@ -166,7 +166,8 @@ if ($result = $conn->query($sql)) {
                 <?php
                 if ($to_filter == 'All') {
                     $display = "";
-                    array_push($group_list,'Public');
+                    array_unshift($group_list, 'Public');
+              
                     foreach ($group_list as $to_filter){
                         $sql = "SELECT * FROM post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC; ";
                         $result = $conn->query($sql);

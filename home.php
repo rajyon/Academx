@@ -157,7 +157,7 @@ if ($result = $conn->query($sql)) {
                     }
                     ?>
                 </select>
-                <input name="filter" type="submit" value="Filter" />
+                <button name="filter" type="submit" class="fas fa-filter" ></button>
             </form>
             </div>
             </div>

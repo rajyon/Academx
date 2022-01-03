@@ -84,4 +84,38 @@ input{
     height: 30px;
   }
 
+.wrapper{
+  display: flex;
+  justify-content: left;
+  margin-left: 10px;
+}
+.like{
+  margin-right: 15px;
+}
+.like i{
+  font-size: 20px;
+  color: gainsboro
+}
+.like p{
+  display: flex;
+  margin-top: 20px;
+  display: inline;
+  margin-left: 10px;
+  font-size: 15px;
+}
+.dislike{
+  margin-left: 15px;
+}
+.dislike i{
+  font-size: 20px;
+  color: gainsboro;
+  
+}
+.dislike p{
+  display: flex;
+  margin-top: 20px;
+  display: inline;
+  margin-left: 10px;
+  font-size: 15px;
+}
   

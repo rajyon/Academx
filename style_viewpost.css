@@ -47,6 +47,8 @@ input{
     margin-bottom: 5px;
     border-radius: 10px;
 }
+
+
 #comment_show{
   border:solid 3px black;
   font-family: "Poppins", sans-serif;
@@ -65,23 +67,34 @@ input{
     height: 30px;
     float: right;
   }
+  #commentpost_button:hover{
+    background: #3F3F3F;
+    color:white;
+    border:solid 1px #5AC7C7;
+  }
   #like_button{
-    background-color: #5AC7C7;
-    border:none;
-    border:solid 1px black;
-    font-size: 14px;
-    border-radius: 2px;
-    width: 100px;
-    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    background-color:white;
+    color: rgb(0, 0, 0);
   }
   #dislike_button{
-    background-color: #5AC7C7;
-    border:none;
-    border:solid 1px black;
-    font-size: 14px;
-    border-radius: 2px;
-    width: 100px;
-    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    background-color:white;
+    color: black;
+  }
+  #like_button:hover{
+    background: #3F3F3F;
+    color:rgb(255, 255, 255);
+  }
+  #dislike_button:hover{
+    background: #3F3F3F;
+    color:rgb(255, 255, 255);
   }
 
 .wrapper{
@@ -103,9 +116,7 @@ input{
   margin-left: 10px;
   font-size: 15px;
 }
-.dislike{
-  margin-left: 15px;
-}
+
 .dislike i{
   font-size: 20px;
   color: gainsboro;

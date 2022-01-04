@@ -53,14 +53,98 @@
   }
   .card_info{
     padding: 15px;
-    display:flex;
-    justify-content: space-between;
     background: #eeeeee;
     font-size: 12px;
     border-bottom: 2px solid #cccccc;
-    align-items: center;
+}
+  .card_info p{
+    display:inline; 
+    margin-right:15px; 
+    margin-left:15px; 
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .card_link1{
+    margin-right: 20px; 
+    border: 1px solid #c53c3c;
+    float:right;  
+    border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    background-color:#c53c3c;
+    color: white;
+    text-align: center;
+    text-decoration: none;
   }
 
+  .card_link1:hover{
+    margin-right: 20px; 
+    border: 1px solid #c53c3c;
+    float:right;  
+    border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    background-color:white;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .card_link2{
+    margin-right: 20px; 
+    border: 1px solid #3F3F3F;
+    float:right;  
+    border-radius: 5px;
+    width: 110px;
+  height: 40px;
+    background-color:#3F3F3F;
+    color: white;
+  }
+  
+  .card_link2:hover{
+    margin-right: 20px; 
+    border: 1px solid #5AC7C7;
+    float:right;  
+    border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    background-color: #5AC7C7;
+    color: black;
+    }
+.card_link2 > a{
+    text-decoration: none;  
+    color:white;
+      }
+.card_link2:hover > a{
+  text-decoration: none;  
+  color:black;
+    }
+ 
+
+  #like_button{
+    border: 1px solid #3F3F3F;
+    border-radius: 5px;
+    width: 110px;
+  height: 40px;
+    background-color:#3F3F3F;
+    color: white;
+  }
+  #dislike_button{
+    border: 1px solid #3F3F3F;
+    border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    background-color:#3F3F3F;
+    color: white;
+  }
+  #like_button:hover{
+    background: #ffffff;
+    color:rgb(0, 0, 0);
+  }
+  #dislike_button:hover{
+    background: #ffffff;
+    color:rgb(0, 0, 0);
+  }
 
   @media screen and (max-width: 650px) {
     .column {

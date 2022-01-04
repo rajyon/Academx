@@ -25,6 +25,7 @@ if(isset($_POST['commentpost_button'])){
                
             }
         }
+        
 //like dislike
     if(isset($_POST['like_button'])){
 
@@ -33,6 +34,7 @@ if(isset($_POST['commentpost_button'])){
             $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
             $PSresult = mysqli_query($conn, $preselect);
 
+            
             if(mysqli_num_rows($PSresult) > 0){
                 $row=mysqli_fetch_assoc($PSresult);
                 $typeReact = $row['typeReact'];
@@ -248,22 +250,14 @@ ________________________________________________________________________________
                     <br>
                     <div class = "wrapper">
                     <div class ="like">
-                        <button id = "like_button" name ="like_button" onclick ="like()" id = "li" class ="fas fa-thumbs-up"><p><?php echo $row1['like_amount'] ?></p></button>
+                    <button id = "like_button" name ="like_button" class ="fas fa-thumbs-up" style="font-size:17px;"><p><?php echo $row1['like_amount'] ?></p></button>
                     </div>
                     <div class ="dislike">
-                        <button  id = "dislike_button" name ="dislike_button" onclick ="dislike()"id = "di" class = "fas fa-thumbs-down"><p><?php echo $row1['dislike_amount'] ?></p></button>
+                        <button  id = "dislike_button" name ="dislike_button" class = "fas fa-thumbs-down" style="font-size:17px;"><p><?php echo $row1['dislike_amount'] ?></p></button>
                     </div>
+                   
                     </div>
-                    <script>
-                        function like(){
-                            document.getElementById("li").style.color ="#5AC7C7"
-                            document.getElementById("di").style.color ="gainsboro"
-                        }
-                        function dislike(){
-                            document.getElementById("di").style.color ="#db405a"
-                            document.getElementById("li").style.color ="gainsboro"
-                        }
-                    </script>
+                   
                 </form>
               </div>
               <br>
@@ -325,6 +319,7 @@ ________________________________________________________________________________
                             </form>
                     </div>'; 
                     }
+                   
                 ?> 
         <br>
 </div> 

@@ -6,6 +6,126 @@ session_start();
   }
   $idofuser =$_SESSION["user_id"];
   
+  //like dislike
+if(isset($_POST['like_button'])){
+    $sql = "SELECT * FROM post_tbl";
+    $result = $conn->query($sql);
+    if (mysqli_num_rows($result)) {
+    $row = mysqli_fetch_assoc($result);
+}
+
+    $likerID = $_SESSION['user_id'];
+    $postID = $row['post_id'];
+    $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
+    $PSresult = mysqli_query($conn, $preselect);
+
+    if(mysqli_num_rows($PSresult) > 0){
+        $row=mysqli_fetch_assoc($PSresult);
+        $typeReact = $row['typeReact'];
+        if($typeReact == 'like'){
+            $updateLike = "DELETE FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";
+            $ULresult = mysqli_query($conn, $updateLike);
+            $selectUpdate1 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+            $selectResult1 = mysqli_query($conn, $selectUpdate1);
+            if(mysqli_num_rows($selectResult1) > 0){
+                $row1=mysqli_fetch_assoc($selectResult1);
+                $likeamount1=$row1['like_amount'];
+                $likeamount1 = $likeamount1 - 1;
+                $update_Like1 = "UPDATE post_tbl SET like_amount = '$likeamount1' WHERE post_id ='$postID'";
+                mysqli_query($conn, $update_Like1);
+            }
+        }else{
+            $updatedisLikeToLike = "UPDATE likedislike_tbl SET typeReact = 'like' WHERE liker_id = '$likerID' AND post_ID = '$postID'";
+            $ULTDresult = mysqli_query($conn, $updatedisLikeToLike);
+            $selectUpdate = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+            $selectResult = mysqli_query($conn, $selectUpdate);
+            if(mysqli_num_rows($selectResult) > 0){
+                $row1=mysqli_fetch_assoc($selectResult);
+                $dislikeamount1=$row1['dislike_amount'];
+                $dislikeamount1 = $dislikeamount1 - 1;
+                $likeamount1=$row1['like_amount'];
+                $likeamount1 = $likeamount1 + 1;
+                $update_Like1 = "UPDATE post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
+                mysqli_query($conn, $update_Like1);
+            }
+        }
+
+    }else {
+        $insertL = "INSERT INTO likedislike_tbl SET post_id = '$postID', liker_id = '$likerID', typeReact = 'like'";
+        $resultiL = mysqli_query($conn, $insertL);
+        $selectUpdate2 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+        $selectResult2 = mysqli_query($conn, $selectUpdate2);
+
+        if(mysqli_num_rows($selectResult2) > 0){
+            $row2=mysqli_fetch_assoc($selectResult2);
+            $likeamount2=$row2['like_amount'];
+            $likeamount2++;
+            $update_Like2 = "UPDATE post_tbl SET like_amount = '$likeamount2' WHERE post_id ='$postID'";
+            mysqli_query($conn, $update_Like2);
+        }
+    }
+
+}
+
+if(isset($_POST['dislike_button'])){
+    $sql = "SELECT * FROM post_tbl";
+    $result = $conn->query($sql);
+    if (mysqli_num_rows($result)) {
+    $row = mysqli_fetch_assoc($result);
+}
+    $dislikerID = $_SESSION['user_id'];
+    $postID = $row['post_id'];
+    $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";   
+    $PSresult = mysqli_query($conn, $preselect);
+
+    if(mysqli_num_rows($PSresult) > 0){
+        $row=mysqli_fetch_assoc($PSresult);
+        $typeReact = $row['typeReact'];
+        if($typeReact == 'dislike'){
+            $updatedisLike = "DELETE FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";
+            $ULresult = mysqli_query($conn, $updatedisLike);
+            $selectUpdate1 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+            $selectResult1 = mysqli_query($conn, $selectUpdate1);
+            if(mysqli_num_rows($selectResult1) > 0){
+                $row1=mysqli_fetch_assoc($selectResult1);
+                $dislikeamount1=$row1['dislike_amount'];
+                $dislikeamount1 = $dislikeamount1 - 1;
+                $update_disLike1 = "UPDATE post_tbl SET dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
+                mysqli_query($conn, $update_disLike1);
+            }
+        }else{
+            $updateLikeTodisLike = "UPDATE likedislike_tbl SET typeReact = 'dislike' WHERE liker_id = '$dislikerID' AND post_ID = '$postID'";
+            $ULTDresult = mysqli_query($conn, $updateLikeTodisLike);
+            $selectUpdate = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+            $selectResult = mysqli_query($conn, $selectUpdate);
+            if(mysqli_num_rows($selectResult) > 0){
+                $row1=mysqli_fetch_assoc($selectResult);
+                $dislikeamount1=$row1['dislike_amount'];
+                $dislikeamount1 = $dislikeamount1 + 1;
+                $likeamount1=$row1['like_amount'];
+                $likeamount1 = $likeamount1 - 1;
+                $update_disLike1 = "UPDATE post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
+                mysqli_query($conn, $update_disLike1);
+            }
+        }
+
+    }else {
+        $insertdL = "INSERT INTO likedislike_tbl SET post_id = '$postID', liker_id = '$dislikerID', typeReact = 'dislike'";
+        $resultiL = mysqli_query($conn, $insertdL);
+        $selectUpdate2 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+        $selectResult2 = mysqli_query($conn, $selectUpdate2);
+
+        if(mysqli_num_rows($selectResult2) > 0){
+            $row2=mysqli_fetch_assoc($selectResult2);
+            $dislikeamount2=$row2['dislike_amount'];
+            $dislikeamount2++;
+            $update_disLike2 = "UPDATE post_tbl SET dislike_amount = '$dislikeamount2' WHERE post_id ='$postID'";
+            mysqli_query($conn, $update_disLike2);
+        }
+    }
+
+}
+
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,18 +179,19 @@ session_start();
                                 <h2>'.$row['post_title'].'</h2>
                                 <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">'.$row['post_content'].'</p>
                             </div>
-                            <div class ="card_info">
-                                <i class="fas fa-thumbs-up fa-xl"><span></span></i>   
-                                <i class="fas fa-thumbs-down fa-xl"><span></span></i>
-                                <a href="viewpost.php?token='.$row['post_id'].'" class ="card_link1">View Article</a>
-                                <a href="delete.php?token='. $row['post_id'] .'" class="card_link" style= "color:red"> Delete </a>
-                                </div>
+                            <form  name="likedislike" method="post">
+                                        <div class ="card_info">
+                                        <button id = "like_button" name ="like_button" onclick ="like()" id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
+                                        <button id = "dislike_button" name ="dislike_button" onclick ="dislike()" id = "li" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
+                                        <button class="card_link1"><a href="delete.php?token='. $row['post_id'] .'" style ="text-decoration: none; color:black;">Delete</a></button>
+                                        <button class="card_link2"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
+                                        </form>
                             </div>
                     </div>';
-                    }
+                    } 
                ?> 
                <script type="text/javascript">
-                    var elems = document.getElementsByClassName('card_link');
+                    var elems = document.getElementsByClassName('card_link1');
                     var confirmIt = function (e) {
                         if (!confirm('Are you sure?')) e.preventDefault();
                     };
@@ -79,7 +200,7 @@ session_start();
                     }
                 </script>
 
-       
+
             </div>
 </div>
 </div>

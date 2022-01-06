@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
 body{
     margin: 0;
     padding: 0;
@@ -6,10 +8,11 @@ body{
 
 .master header{
     position: fixed;
-    background: #3F3F3F;
     width:100%;
     height:60px;
     z-index: 1;
+    border-bottom: 2px solid #1b1b1b;
+    background-image: linear-gradient(90deg, #3F3F3F,#5AC7C7 );
 }
 .master span{
     color:#5AC7C7
@@ -17,23 +20,21 @@ body{
 .master header label{
     position:absolute;
     top: 16px;
-    background-color: #3F3F3F;
 }
 .master .left_area1{
     position:absolute;
     top: 16px;
-    background-color: #3F3F3F;
 }
 .master .left_area1 h3{
     color: #fff;
     margin: 0;
-    margin-left: 45px;
-    margin-top: -1px;
+    margin-left: 30px;
+    margin-top: -7px;
     left: 100px;
     text-transform: uppercase;
-    font-size: 22px;
+    font-size: 35px;
     font-weight: 900;
-    padding-left: 10px;
+    padding-left: 2px;
 }
 
 .master .sidebar span{
@@ -42,7 +43,7 @@ body{
 
 .master .sidebar{
     position: fixed;
-    background: #7B1324;
+    background: #3F3F3F ;
     margin-top: 60px;
     padding-top: 30px;
     width: 15%;
@@ -60,18 +61,21 @@ body{
     max-height: 150px;
     border-radius: 100px;
     margin-bottom: 10px;
+    border: 5px solid #5AC7C7;
 }
 .master .sidebar h4{
     color: #ccc;
     margin-top: 0px;
     margin-bottom: 20px;
-    font: 18px Fantasy;
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
 }
 .master .sidebar h5{
     color: #ccc;
     margin-top: 0px;
     margin-bottom: 20px;
-    font: 12px sans-serif;
+    font-family: sans-serif;
+    font-size: 12px;
 }
 .master .sidebar a{
     color: #fff;
@@ -83,7 +87,6 @@ body{
     box-sizing:border-box;
     transition: 0.5s;
     transition-property: background;
-    
 }
 .sidebar a:hover{
     background: #5AC7C7;

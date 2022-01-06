@@ -156,7 +156,7 @@ if(isset($_POST['dislike_button'])){
 <div class="container-fluid" style="background-color: white;height:100vh">
 <div class="contentx">
   
-<h2 style="text-align:center; border-top: 5px solid #7B1324; border-bottom: 5px solid #7B1324;  border-radius: 5px;">My Posts</h2>
+<h2 style="text-align:center; border-top: 5px solid #5AC7C7; border-bottom: 5px solid #5AC7C7;  border-radius: 5px;">My Posts</h2>
             <br>  
             <div class="row">         
                <?php
@@ -181,8 +181,8 @@ if(isset($_POST['dislike_button'])){
                             </div>
                             <form  name="likedislike" method="post">
                                         <div class ="card_info">
-                                        <button id = "like_button" name ="like_button" onclick ="like()" id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
-                                        <button id = "dislike_button" name ="dislike_button" onclick ="dislike()" id = "li" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
+                                        <button id = "like_button" name ="like_button" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
+                                        <button id = "dislike_button" name ="dislike_button" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
                                         <button class="card_link1"><a href="delete.php?token='. $row['post_id'] .'" style ="text-decoration: none; color:black;">Delete</a></button>
                                         <button class="card_link2"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
                                         </form>

@@ -68,7 +68,7 @@ if (mysqli_num_rows($result2)) {
     </div>
     <div class="container-fluid" style="background-color: white;height:100vh">
         <div class="contentx">
-        <h2 style="text-align:center; border-top: 5px solid #7B1324; border-bottom: 5px solid #7B1324;  border-radius: 5px;">Profile</h2>
+        <h2 style="text-align:center; border-top: 5px solid #5AC7C7; border-bottom: 5px solid #5AC7C7;  border-radius: 5px;">Profile</h2>
             <table class="content-table" style="width:95%;">
                 <tr>
                     <th colspan="3"><a href="profile.php"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Refresh</a></th>

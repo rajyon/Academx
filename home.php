@@ -229,8 +229,6 @@ if(isset($_POST['dislike_button'])){
                             }
                             ?>
                         </select>
-
-
                         <textarea id="subject_post" maxlength="50" name="subject_post" placeholder="Subject or Title" rows="1" style="width:100%; display:block; " required></textarea>
                         <br>
                         <textarea id="content_post" maxlength="350" name="content_post" placeholder="What do you think?" rows="5" style="width:100%; display:block;" required></textarea>
@@ -255,7 +253,7 @@ if(isset($_POST['dislike_button'])){
                 </div>
             </div>
 
-            <h2 style="text-align:center; border-top: 5px solid #7B1324; border-bottom: 5px solid #7B1324;  border-radius: 5px;">Posts</h2>
+            <h2 style="text-align:center; border-top: 5px solid #5AC7C7; border-bottom: 5px solid #5AC7C7;  border-radius: 5px;">Posts</h2>
             <br>
             <div style=" display:flex; justify-content:space-between; border:2px solid #ccc!important; padding-right:5px">
             <div class="search-container">
@@ -293,8 +291,7 @@ if(isset($_POST['dislike_button'])){
                         $sql = "SELECT * FROM post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC; ";
                         $result = $conn->query($sql);
 
-             while ($row = mysqli_fetch_assoc($result)) {
-                          
+             while ($row = mysqli_fetch_assoc($result)) {  
                     $display .= '
                                <div class="column">
                                     <div class="card">
@@ -312,8 +309,8 @@ if(isset($_POST['dislike_button'])){
                                     </div>
                                     <form  name="likedislike" method="post">
                                         <div class ="card_info">
-                                        <button id = "like_button" name ="like_button" onclick ="like()" id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
-                                        <button id = "dislike_button" name ="dislike_button" onclick ="dislike()" id = "li" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
+                                        <button id = "like_button" name ="like_button" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
+                                        <button id = "dislike_button" name ="dislike_button" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
                                         <button class="card_link"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
                                         </form>
                                     </div>
@@ -348,7 +345,7 @@ if(isset($_POST['dislike_button'])){
                                     </div>
                                        <form  name="likedislike" method="post" action="viewpost.php?token='.$row['post_id']. '">
                                         <div class ="card_info">
-                                        <button id = "like_button" name ="like_button" onclick ="like()" id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
+                                        <button id = "like_button1" name ="like_button" onclick ="like()" id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
                                         <button id = "dislike_button" name ="dislike_button" onclick ="dislike()" id = "li" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
                                         <button type="submit" class ="card_link">View Article</button>
                                         </form>

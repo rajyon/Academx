@@ -22,9 +22,8 @@ if (!isset($_SESSION["user_id"])) {
 
 <body>
     <div class="master">
-    <input type="checkbox" id="check">
     <header>
-        <label for="check"><i class="fas fa-bars" id="sidebar_btn"></i></label><div class="left_area1"><h3>Acade<span>Mx</span></h3></div>
+    <div class="left_area1"><h3>Acade<span>Mx</span></h3></div>
     </header>
     <div class="sidebar">
         <center>

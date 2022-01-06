@@ -94,7 +94,7 @@ if (isset($_POST["resetPassword"])) {
             ex ratione. Aliquid!
           </p>
         </div>
-        <img src="img/log.svg" class="image" alt="" />
+        <img src="img/1.png" class="image" alt="" />
       </div>
     </div>
   </div>

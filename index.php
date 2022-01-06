@@ -162,8 +162,8 @@ if (isset($_POST["login"])) {
       <div class="panel left-panel">
         <div class="content">
           <h3>New here ?</h3>
-          <p>
-            What are you waiting for? Join Us!
+          <p style ="font-size: 19px;">
+            What are you waiting for? <br><br>Be a member of <span>Acade</span><span style="color: #5AC7C7;">Mx</span>
           </p>
           <button class="btn transparent" id="sign-up-btn">
             Sign up 
@@ -174,10 +174,9 @@ if (isset($_POST["login"])) {
       </div>
       <div class="panel right-panel">
         <div class="content">
-          <h3>One of us ?</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            laboriosam ad deleniti.
+          <h3>One of us?</h3>
+          <p style ="font-size: 19px;">
+          Already one of us? Enter now!
           </p>
           <button class="btn transparent" id="sign-in-btn">
             Login

@@ -153,6 +153,7 @@ if(isset($_POST['dislike_button'])){
             </script>
         </div>
     </div>
+    
 <div class="container-fluid" style="background-color: white;height:100vh">
 <div class="contentx">
   
@@ -186,6 +187,7 @@ if(isset($_POST['dislike_button'])){
                                         <button class="card_link1"><a href="delete.php?token='. $row['post_id'] .'" style ="text-decoration: none; color:black;">Delete</a></button>
                                         <button class="card_link2"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
                                         </form>
+                            </div>
                             </div>
                     </div>';
                     } 

@@ -92,7 +92,7 @@ if (isset($_POST["btn_search"])){
             <h2 style="text-align:center; border-top: 5px solid #7B1324; border-bottom: 5px solid #7B1324;  border-radius: 5px;">Group</h2>
             <div  <?php if ($showDivFlag===true){?>style="display:none"<?php } ?> style="height: 60%;border:solid thin #aaa; padding: 20px; background-color:#3F3F3F;color:white">
                 <form name="frmCreate" method="post">
-                    <h1>Create a group</h1><br>
+                    <h1><span style="color: #5AC7C7;">Create</span> a group</h1><br>
 
                     Group Name:
                     <div class="input-field">
@@ -109,7 +109,7 @@ if (isset($_POST["btn_search"])){
 
             <div style="height: 42%;border:solid thin #aaa; padding: 20px; background-color:#3F3F3F;color:white">
                 <form name="frmJoin" method="post">
-                    <h1>Join a group</h1><br>
+                    <h1><span style="color: #5AC7C7;">Join</span> a group</h1><br>
                     Group Code/Name:
                     <div class="input-field">
                         <i class="fas fa-search"></i><input type="text" name="txt_search" placeholder="Enter code/name here..." required />

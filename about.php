@@ -31,7 +31,7 @@ session_start();
     <div class="container-fluid" style="background-color: white;height:100vh;">
 <div class="contentx">
 <div class="about-section">
-  <h1>Acade<span>Mx</span></h1><br>
+  <h1 style = "font-weight: 900;">ACADE<span>MX</span></h1><br>
   <div class="row">
   <div class="box">
   <h3 style="color: #5AC7C7;">MISSION</h3>
@@ -44,7 +44,7 @@ session_start();
   </div>
 </div>
 <br>
-<h2 style="text-align:center; border-top: 5px solid #7B1324; border-bottom: 5px solid #7B1324;  border-radius: 5px;">Our Team</h2>
+<h2 style="text-align:center; border-top: 5px solid #5AC7C7; border-bottom: 5px solid #5AC7C7;  border-radius: 5px;">Our Team</h2>
 <div class="row">
   <div class="column">
     <div class="card">

@@ -345,9 +345,9 @@ if(isset($_POST['dislike_button'])){
                                     </div>
                                        <form  name="likedislike" method="post" action="viewpost.php?token='.$row['post_id']. '">
                                         <div class ="card_info">
-                                        <button id = "like_button1" name ="like_button" onclick ="like()" id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
+                                        <button id = "like_button" name ="like_button" onclick ="like()" id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
                                         <button id = "dislike_button" name ="dislike_button" onclick ="dislike()" id = "li" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
-                                        <button type="submit" class ="card_link">View Article</button>
+                                        <button class="card_link"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
                                         </form>
                                     </div>
                                     </form>

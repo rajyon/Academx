@@ -21,7 +21,6 @@ if(isset($_POST['commentpost_button'])){
             {
              echo $conn->error;//getting the error 
             }else{
-                echo "<script>alert('Comment Uploaded!');</script>";
                
             }
         }
@@ -261,7 +260,7 @@ ________________________________________________________________________________
                 </form>
               </div>
               <br>
-                  <h2 style="text-align:center; border-bottom: 2px solid red;">Comments Section</h2>
+                  <h2 style="text-align:center; border-bottom: 2px solid red;">Comment Section</h2>
                   <div <?php if ($gchecker == 'B'){?>style="display:none"<?php }?> style = "border:solid thin #aaa; padding: 10px; padding-bottom:4px; background-color:none;">
                 <div>
                     <h6 style="color: black; padding-left:10px; display: inline-block;">Commenting as: <?php echo $username1; ?></h6>

@@ -32,7 +32,7 @@ if(isset($_POST['commentpost_button'])){
             $postID = $_GET['token'];
             $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
             $PSresult = mysqli_query($conn, $preselect);
-
+            $color = "";
             
             if(mysqli_num_rows($PSresult) > 0){
                 $row=mysqli_fetch_assoc($PSresult);
@@ -70,7 +70,6 @@ if(isset($_POST['commentpost_button'])){
                 $resultiL = mysqli_query($conn, $insertL);
                 $selectUpdate2 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
                 $selectResult2 = mysqli_query($conn, $selectUpdate2);
-
                 if(mysqli_num_rows($selectResult2) > 0){
                     $row2=mysqli_fetch_assoc($selectResult2);
                     $likeamount2=$row2['like_amount'];
@@ -78,8 +77,7 @@ if(isset($_POST['commentpost_button'])){
                     $update_Like2 = "UPDATE post_tbl SET like_amount = '$likeamount2' WHERE post_id ='$postID'";
                     mysqli_query($conn, $update_Like2);
                 }
-            }
-        
+            }           
         }
         
         if(isset($_POST['dislike_button'])){
@@ -147,6 +145,7 @@ if(isset($_POST['commentpost_button'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <link rel="stylesheet" href="style_viewpost.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Home</title>
 </head>
 
@@ -247,16 +246,47 @@ $useID=$_SESSION['user_id'];
 __________________________________________________________________________________________________
                     <?php echo $row1['post_content'];?></textarea>
                     <br>
+                    <?php
+                         $likerID = $_SESSION['user_id'];
+                         $postID = $_GET['token'];
+
+                         $selectionofreact = "SELECT * FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id ='$postID'";
+                         $SRresult = mysqli_query($conn, $selectionofreact);
+
+                         if (mysqli_num_rows($SRresult)){
+                             $forcolorow =mysqli_fetch_assoc($SRresult);
+                             $selectReaction = $forcolorow['typeReact'];
+                             $newcolor = "";
+                             $fortextcolor = "";
+                             $forbordercolor = "";
+                             if($selectReaction == 'like'){
+                                 $newcolor = '3F3F3F';
+                                 $fortextcolor = "ffffff";
+                                 $forbordercolor = "ffffff";
+                             }else{
+                                 $newcolor ='ffffff';
+                                 $fortextcolor = "3F3F3F";
+                                 $forbordercolor = "3F3F3F";
+                             }
+                            if ($selectReaction == 'dislike'){
+                                $newcolor1 = '3F3F3F';
+                                $fortextcolor1 = "ffffff";
+                                $forbordercolor1 = "ffffff";
+                             }else{
+                                $newcolor1 = 'ffffff';
+                                $fortextcolor1 = "3F3F3F";
+                                $forbordercolor1 = "3F3F3F";
+                             }
+                         }
+                    ?>
                     <div class = "wrapper">
                     <div class ="like">
-                    <button id = "like_button" name ="like_button" class ="fas fa-thumbs-up" style="font-size:17px;"><p><?php echo $row1['like_amount'] ?></p></button>
+                    <button id = "like_button" name ="like_button" class ="fas fa-thumbs-up" style="font-size:17px; background-color: #<?php echo $newcolor; ?>; border-color: #<?php echo $forbordercolor; ?>; color: #<?php echo $fortextcolor; ?>;"><p><?php echo $row1['like_amount'] ?></p></button>
                     </div>
                     <div class ="dislike">
-                        <button  id = "dislike_button" name ="dislike_button" class = "fas fa-thumbs-down" style="font-size:17px;"><p><?php echo $row1['dislike_amount'] ?></p></button>
+                        <button  id = "dislike_button" name ="dislike_button" class = "fas fa-thumbs-down" style="font-size:17px; background-color: #<?php echo $newcolor1; ?>; border-color: #<?php echo $forbordercolor1; ?>; color: #<?php echo $fortextcolor1; ?>;"><p><?php echo $row1['dislike_amount'] ?></p></button>
                     </div>
-                   
                     </div>
-                   
                 </form>
               </div>
               <br>

@@ -8,26 +8,62 @@ if (!isset($_SESSION["user_id"])) {
 date_default_timezone_set("Asia/Manila");
 
 if(isset($_POST['commentpost_button'])){
+    $poster_ID = "";
+    if(isset($_GET['token']))
+       {
+         $ID = $_GET['token'];
+         $sql = "SELECT * FROM post_tbl WHERE post_id = '$ID'";
+         $result1 = $conn->query($sql);
+         if(mysqli_num_rows($result1)>0){
+            $row1 = mysqli_fetch_assoc($result1);
+            $poster_ID = $row1['userid'];
+         }
+       
+        }
 
   $postId=$_GET['token'];
   $commenterId=$_SESSION['user_id'];
+  $commenter = $_SESSION['Profile_Name'];
   $date= date("Y-m-d h:i:a");
   $commentContent=$_POST['comment_post'];
+  $notifContent = "$commenter commented on your post.";
   
 //Insertion to database       
        $sql= "INSERT INTO comment_tbl (post_id, commenter_id, comment_date, comment_content) VALUES ('$postId', '$commenterId', '$date','$commentContent')";
-            
-            if(!$conn->query($sql))
+       $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'comment', poster_ID = '$poster_ID';";
+
+       if(!$conn->query($sql))
             {
              echo $conn->error;//getting the error 
             }else{
-               
+               if(!$conn->query($notifsql)){
+                echo $conn->error;
+               }
             }
         }
         
 //like dislike
     if(isset($_POST['like_button'])){
+        $poster_ID = "";
+        $postId=$_GET['token'];
+        $commenterId=$_SESSION['user_id'];
+        $liker = $_SESSION['Profile_Name'];
+        $notifContent = "$liker liked your post.";
+        if(isset($_GET['token']))
+       {
+         $ID = $_GET['token'];
+         $sql = "SELECT * FROM post_tbl WHERE post_id = '$ID'";
+         $result1 = $conn->query($sql);
+         if(mysqli_num_rows($result1)>0){
+            $row1 = mysqli_fetch_assoc($result1);
+            $poster_ID = $row1['userid'];
+         }
+       
+        }
 
+        $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID';";
+
+           
             $likerID = $_SESSION['user_id'];
             $postID = $_GET['token'];
             $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
@@ -62,6 +98,9 @@ if(isset($_POST['commentpost_button'])){
                         $likeamount1 = $likeamount1 + 1;
                         $update_Like1 = "UPDATE post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                         mysqli_query($conn, $update_Like1);
+                        if(!$conn->query($notifsql)){
+                            echo $conn->error;
+                           }
                     }
                 }
 
@@ -77,12 +116,35 @@ if(isset($_POST['commentpost_button'])){
                     $likeamount2++;
                     $update_Like2 = "UPDATE post_tbl SET like_amount = '$likeamount2' WHERE post_id ='$postID'";
                     mysqli_query($conn, $update_Like2);
+                    if(!$conn->query($notifsql)){
+                        echo $conn->error;
+                       }
                 }
             }
         
         }
         
         if(isset($_POST['dislike_button'])){
+            $poster_ID = "";
+            $postId=$_GET['token'];
+            $commenterId=$_SESSION['user_id'];
+            $liker = $_SESSION['Profile_Name'];
+            $notifContent = "$liker disliked your post.";
+            if(isset($_GET['token']))
+           {
+             $ID = $_GET['token'];
+             $sql = "SELECT * FROM post_tbl WHERE post_id = '$ID'";
+             $result1 = $conn->query($sql);
+             if(mysqli_num_rows($result1)>0){
+                $row1 = mysqli_fetch_assoc($result1);
+                $poster_ID = $row1['userid'];
+             }
+           
+            }
+    
+            $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID';";
+    
+
             $dislikerID = $_SESSION['user_id'];
             $postID = $_GET['token'];
             $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";   
@@ -116,6 +178,9 @@ if(isset($_POST['commentpost_button'])){
                         $likeamount1 = $likeamount1 - 1;
                         $update_disLike1 = "UPDATE post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                         mysqli_query($conn, $update_disLike1);
+                        if(!$conn->query($notifsql)){
+                            echo $conn->error;
+                           }
                     }
                 }
 
@@ -131,6 +196,9 @@ if(isset($_POST['commentpost_button'])){
                     $dislikeamount2++;
                     $update_disLike2 = "UPDATE post_tbl SET dislike_amount = '$dislikeamount2' WHERE post_id ='$postID'";
                     mysqli_query($conn, $update_disLike2);
+                    if(!$conn->query($notifsql)){
+                        echo $conn->error;
+                       }
                 }
             }
         
@@ -173,6 +241,7 @@ $gchecker='A';
 $sqlx = "";
 $post_group = "";
 $useID=$_SESSION['user_id'];
+
        if(isset($_GET['token']))
        {
          $ID = $_GET['token'];
@@ -181,6 +250,7 @@ $useID=$_SESSION['user_id'];
          if(mysqli_num_rows($result1)>0){
             $row1 = mysqli_fetch_assoc($result1);
             $post_group = $row1['post_group'];
+            $poster_ID = $row1['userid'];
             $post_code = "";
             $presqlx = "SELECT * FROM group_tbl WHERE group_name = '$post_group'";
             $preresult6 = mysqli_query($conn,$presqlx);

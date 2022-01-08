@@ -184,7 +184,7 @@ if(isset($_POST['dislike_button'])){
                                         <div class ="card_info">
                                         <button id = "like_button" name ="like_button" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
                                         <button id = "dislike_button" name ="dislike_button" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
-                                        <button class="card_link1"><a href="delete.php?token='. $row['post_id'] .'" style ="text-decoration: none; color:black;">Delete</a></button>
+                                        <button class="card_link1"><a href="delete.php?token='. $row['post_id'] .'" style = "color:black;text-decoration:none;">Delete</a></button>
                                         <button class="card_link2"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
                                         </form>
                             </div>

@@ -62,10 +62,8 @@ if(!empty($_POST)) {
     $array = $_POST;
     $array = array_reverse($array);
     $key = key($array); // get first key
-    echo $key;
     if(str_contains($key,'dislike')){
         $dislike = $key;
-        echo $dislike;
     }
     else{
         $like = $key;
@@ -74,7 +72,10 @@ if(!empty($_POST)) {
 }
 //like dislike
 if(isset($_POST[$like])){
-    $postID = $_GET['token'];
+    $postID = "";
+    if(isset($_GET['token'])){
+        $postID = $_GET['token'];  
+    }
     $sql = "SELECT * FROM post_tbl WHERE post_id ='$postID'";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result)) {
@@ -135,7 +136,10 @@ if(isset($_POST[$like])){
 }
 
 if(isset($_POST[$dislike])){
-    $postID = $_GET['token'];
+    $postID = "";
+    if(isset($_GET['token'])){
+        $postID = $_GET['token'];  
+    }
     $sql = "SELECT * FROM post_tbl WHERE post_id ='$postID'";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result)) {

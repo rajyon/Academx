@@ -330,7 +330,7 @@ if(isset($_POST[$dislike])){
                                         <h2>' . $row['post_title'] . '</h2>
                                         <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">' . $row['post_content'] . '</p>
                                     </div>
-                                    <form  action="?token='. $row['post_id'] .'" method="post">
+                                    <form  action="?token='. $row['post_id'] .'" method="post" >
                                         <div class ="card_info">
                                         <button id = "like_button" name ="like_button'.$i.'" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
                                         <button id = "dislike_button" name ="dislike_button'.$i.'" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>

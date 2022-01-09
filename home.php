@@ -71,8 +71,13 @@ if(!empty($_POST)) {
     
 }
 //like dislike
+$newcolor = 'ffffff';
+$fortextcolor = "3F3F3F";
+$forbordercolor = "3F3F3F";
+
 if(isset($_POST[$like])){
     $postID = "";
+    $likerID = $_SESSION['user_id'];
     if(isset($_GET['token'])){
         $postID = $_GET['token'];  
     }
@@ -82,7 +87,6 @@ if(isset($_POST[$like])){
     $row = mysqli_fetch_assoc($result);
 }
 
-    $likerID = $_SESSION['user_id'];
 
     $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
     $PSresult = mysqli_query($conn, $preselect);
@@ -90,9 +94,13 @@ if(isset($_POST[$like])){
     if(mysqli_num_rows($PSresult) > 0){
         $row=mysqli_fetch_assoc($PSresult);
         $typeReact = $row['typeReact'];
+     
         if($typeReact == 'like'){
             $updateLike = "DELETE FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";
             $ULresult = mysqli_query($conn, $updateLike);
+            $newcolor = 'ffffff';
+            $fortextcolor = "3F3F3F";
+            $forbordercolor = "3F3F3F";
             $selectUpdate1 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
             $selectResult1 = mysqli_query($conn, $selectUpdate1);
             if(mysqli_num_rows($selectResult1) > 0){
@@ -105,6 +113,9 @@ if(isset($_POST[$like])){
         }else{
             $updatedisLikeToLike = "UPDATE likedislike_tbl SET typeReact = 'like' WHERE liker_id = '$likerID' AND post_ID = '$postID'";
             $ULTDresult = mysqli_query($conn, $updatedisLikeToLike);
+            $newcolor ='3F3F3F';
+            $fortextcolor = "ffffff";
+            $forbordercolor = "ffffff";
             $selectUpdate = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
             $selectResult = mysqli_query($conn, $selectUpdate);
             if(mysqli_num_rows($selectResult) > 0){
@@ -121,6 +132,9 @@ if(isset($_POST[$like])){
     }else {
         $insertL = "INSERT INTO likedislike_tbl SET post_id = '$postID', liker_id = '$likerID', typeReact = 'like'";
         $resultiL = mysqli_query($conn, $insertL);
+        $newcolor = '3F3F3F';
+        $fortextcolor = "ffffff";
+        $forbordercolor = "ffffff";
         $selectUpdate2 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
         $selectResult2 = mysqli_query($conn, $selectUpdate2);
 
@@ -134,7 +148,9 @@ if(isset($_POST[$like])){
     }
 
 }
-
+$newcolor1 = 'ffffff';
+$fortextcolor1 = "3F3F3F";
+$forbordercolor1 = "3F3F3F";
 if(isset($_POST[$dislike])){
     $postID = "";
     if(isset($_GET['token'])){
@@ -155,6 +171,9 @@ if(isset($_POST[$dislike])){
         if($typeReact == 'dislike'){
             $updatedisLike = "DELETE FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";
             $ULresult = mysqli_query($conn, $updatedisLike);
+            $newcolor1 = 'ffffff';
+            $fortextcolor1 = "3F3F3F";
+            $forbordercolor1 = "3F3F3F";
             $selectUpdate1 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
             $selectResult1 = mysqli_query($conn, $selectUpdate1);
             if(mysqli_num_rows($selectResult1) > 0){
@@ -167,6 +186,9 @@ if(isset($_POST[$dislike])){
         }else{
             $updateLikeTodisLike = "UPDATE likedislike_tbl SET typeReact = 'dislike' WHERE liker_id = '$dislikerID' AND post_ID = '$postID'";
             $ULTDresult = mysqli_query($conn, $updateLikeTodisLike);
+            $newcolor1 ='3F3F3F';
+            $fortextcolor1 = "ffffff";
+            $forbordercolor1 = "ffffff";
             $selectUpdate = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
             $selectResult = mysqli_query($conn, $selectUpdate);
             if(mysqli_num_rows($selectResult) > 0){
@@ -185,7 +207,9 @@ if(isset($_POST[$dislike])){
         $resultiL = mysqli_query($conn, $insertdL);
         $selectUpdate2 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
         $selectResult2 = mysqli_query($conn, $selectUpdate2);
-
+        $newcolor1 = '3F3F3F';
+        $fortextcolor1 = "ffffff";
+        $forbordercolor1 = "ffffff";
         if(mysqli_num_rows($selectResult2) > 0){
             $row2=mysqli_fetch_assoc($selectResult2);
             $dislikeamount2=$row2['dislike_amount'];
@@ -332,8 +356,8 @@ if(isset($_POST[$dislike])){
                                     </div>
                                     <form  action="?token='. $row['post_id'] .'" method="post" >
                                         <div class ="card_info">
-                                        <button id = "like_button" name ="like_button'.$i.'" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
-                                        <button id = "dislike_button" name ="dislike_button'.$i.'" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
+                                        <button id = "like_button" name ="like_button'.$i.'" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; background-color: #'.$newcolor.'; border-color: #'.$forbordercolor.'; color: #'.$fortextcolor.';"><p>'.$row['like_amount'].'</p></button>
+                                        <button id = "dislike_button" name ="dislike_button'.$i.'" class ="fas fa-thumbs-down" style="font-size:15px; background-color: #'.$newcolor1.'; border-color: #'.$forbordercolor1.'; color: #'.$fortextcolor1.';"><p>'.$row['dislike_amount'].'</p></button>
                                         <button class="card_link"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
                                         </form>
                                     </div>
@@ -369,8 +393,8 @@ if(isset($_POST[$dislike])){
                                     </div>
                                        <form  action="?token='. $row['post_id'] .'" method="post">
                                         <div class ="card_info">
-                                        <button id = "like_button" name ="like_button'.$i.'"  id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
-                                        <button id = "dislike_button" name ="dislike_button'.$i.'"  id = "li" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
+                                        <button id = "like_button" name ="like_button'.$i.'"  id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; background-color: #'.$newcolor.'; border-color: #'.$forbordercolor.'; color: #'.$fortextcolor.'; "><p>'.$row['like_amount'].'</p></button>
+                                        <button id = "dislike_button" name ="dislike_button'.$i.'"  id = "li" class ="fas fa-thumbs-down" style="font-size:15px; background-color: #'.$newcolor1.'; border-color: #'.$forbordercolor1.'; color: #'.$fortextcolor1.';"><p>'.$row['dislike_amount'].'</p></button>
                                         <button class="card_link"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
                                         </form>
                                     </div>

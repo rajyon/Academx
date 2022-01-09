@@ -55,16 +55,34 @@ if ($result = $conn->query($sql)) {
         array_push($group_names, $item2);
     }
 }
+$like = null;
+$dislike = null;
+
+if(!empty($_POST)) {
+    $array = $_POST;
+    $array = array_reverse($array);
+    $key = key($array); // get first key
+    echo $key;
+    if(str_contains($key,'dislike')){
+        $dislike = $key;
+        echo $dislike;
+    }
+    else{
+        $like = $key;
+    }
+    
+}
 //like dislike
-if(isset($_POST['like_button'])){
-    $sql = "SELECT * FROM post_tbl";
+if(isset($_POST[$like])){
+    $postID = $_GET['token'];
+    $sql = "SELECT * FROM post_tbl WHERE post_id ='$postID'";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result)) {
     $row = mysqli_fetch_assoc($result);
 }
 
     $likerID = $_SESSION['user_id'];
-    $postID = $row['post_id'];
+
     $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
     $PSresult = mysqli_query($conn, $preselect);
 
@@ -116,14 +134,14 @@ if(isset($_POST['like_button'])){
 
 }
 
-if(isset($_POST['dislike_button'])){
-    $sql = "SELECT * FROM post_tbl";
+if(isset($_POST[$dislike])){
+    $postID = $_GET['token'];
+    $sql = "SELECT * FROM post_tbl WHERE post_id ='$postID'";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result)) {
     $row = mysqli_fetch_assoc($result);
 }
     $dislikerID = $_SESSION['user_id'];
-    $postID = $row['post_id'];
     $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";   
     $PSresult = mysqli_query($conn, $preselect);
 
@@ -290,8 +308,9 @@ if(isset($_POST['dislike_button'])){
                     foreach ($group_list as $to_filter){
                         $sql = "SELECT * FROM post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC; ";
                         $result = $conn->query($sql);
-
+                        $i=0;
              while ($row = mysqli_fetch_assoc($result)) {  
+                 $i++;
                     $display .= '
                                <div class="column">
                                     <div class="card">
@@ -307,10 +326,10 @@ if(isset($_POST['dislike_button'])){
                                         <h2>' . $row['post_title'] . '</h2>
                                         <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">' . $row['post_content'] . '</p>
                                     </div>
-                                    <form  name="likedislike" method="post">
+                                    <form  action="?token='. $row['post_id'] .'" method="post">
                                         <div class ="card_info">
-                                        <button id = "like_button" name ="like_button" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
-                                        <button id = "dislike_button" name ="dislike_button" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
+                                        <button id = "like_button" name ="like_button'.$i.'" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
+                                        <button id = "dislike_button" name ="dislike_button'.$i.'" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
                                         <button class="card_link"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
                                         </form>
                                     </div>
@@ -327,8 +346,9 @@ if(isset($_POST['dislike_button'])){
                     $sql = "SELECT * FROM post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC ";
                     $result = $conn->query($sql);
 
-             
+                    $i=0;
                     while ($row = mysqli_fetch_assoc($result)) {
+                        $i++;
                         echo '
                            <div class="column">
                                 <div class="card">
@@ -343,14 +363,13 @@ if(isset($_POST['dislike_button'])){
                                     <h2>' . $row['post_title'] . '</h2>
                                     <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">' . $row['post_content'] . '</p>
                                     </div>
-                                       <form  name="likedislike" method="post" action="viewpost.php?token='.$row['post_id']. '">
+                                       <form  action="?token='. $row['post_id'] .'" method="post">
                                         <div class ="card_info">
-                                        <button id = "like_button" name ="like_button" onclick ="like()" id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
-                                        <button id = "dislike_button" name ="dislike_button" onclick ="dislike()" id = "li" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
+                                        <button id = "like_button" name ="like_button'.$i.'"  id = "li" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; "><p>'.$row['like_amount'].'</p></button>
+                                        <button id = "dislike_button" name ="dislike_button'.$i.'"  id = "li" class ="fas fa-thumbs-down" style="font-size:15px; "><p>'.$row['dislike_amount'].'</p></button>
                                         <button class="card_link"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
                                         </form>
                                     </div>
-                                    </form>
                                 </div>
                         </div>';
                     }

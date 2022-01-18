@@ -50,7 +50,7 @@ else{
                 <h3>Acade<span>Mx</span></h3>
             </div>
             <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn"><i onclick="myFunction()" class="fas fa-bell" style="font-size:20px;color:white;pointer-events:none;" ></i><?php  if(mysqli_num_rows($notif_result)>0){ $x=mysqli_num_rows($notif_result); echo '<span class="badge">'.$x.'</span>';} ?></button>
+                <button onclick="myFunction()" class="dropbtn"><i class="fas fa-bell" style="font-size:20px;color:white;pointer-events:none;" ></i><?php  if(mysqli_num_rows($notif_result)>0){ $x=mysqli_num_rows($notif_result); echo '<span class="badge">'.$x.'</span>';} ?></button>
                 <div id="myDropdown" class="dropdown-content">
                     <div style="background-color:#5AC7C7;text-align:center;position:fixed;width:350px">Notifications</div>
                     <br>

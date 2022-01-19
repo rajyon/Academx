@@ -49,8 +49,7 @@ if(isset($_POST['commentpost_button'])){
         $commenterId=$_SESSION['user_id'];
         $liker = $_SESSION['Profile_Name'];
         $notifContent = "$liker liked your post.";
-        if(isset($_GET['token']))
-       {
+        if(isset($_GET['token'])){
          $ID = $_GET['token'];
          $sql = "SELECT * FROM post_tbl WHERE post_id = '$ID'";
          $result1 = $conn->query($sql);

@@ -76,6 +76,7 @@ body{
 .master span{
     color:#5AC7C7;
 }
+
 .master header label{
     position:absolute;
     top: 16px;
@@ -201,3 +202,4 @@ label #sidebar_btn:hover{
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+  

@@ -6,7 +6,7 @@ if (!isset($_SESSION["user_id"])) {
     header("location: index.php");
 }
 date_default_timezone_set("Asia/Manila");
-
+$date= date("F j, Y, g:i A");
 $poster_ID = "";
 $postID = "";
 $dislikerID = $_SESSION['user_id'];
@@ -22,7 +22,7 @@ $row = mysqli_fetch_assoc($result);
 $poster_ID = $row['userid'];
 }
 
-$notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postID', actor_ID = '$dislikerID', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID';";
+$notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postID', actor_ID = '$dislikerID', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID', active = 1, action_time='$date';";
 $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";   
 $PSresult = mysqli_query($conn, $preselect);
 

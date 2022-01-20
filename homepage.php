@@ -6,31 +6,32 @@ session_start();
 $user_ID = '';
 if (!isset($_SESSION["user_id"])) {
     header("Location: index.php");
-}
-else{
+} else {
     $user_ID = $_SESSION["user_id"];
 }
 ?>
 
-<?php 
+<?php
+$i = 0;
+$display = "";
+$sql = "SELECT * FROM notifications_tbl WHERE poster_ID = '$user_ID' ORDER BY ID DESC";
+$notif_result = mysqli_query($conn, $sql);
+if ($notif_result) {
+    if (mysqli_num_rows($notif_result) > 0) {
+        while ($rows = mysqli_fetch_assoc($notif_result)) {
+            if ($rows['active'] == 1) {
+                $i++;
+                $display .= '<a href="viewpost.php?token=' . $rows['post_ID'] . '"><span id="notif" style="font-size:16px;color:white">' . $rows['content'] . '</span><i class="fas fa-circle" style="float:right;color:white;font-size:10px;padding-top:12px"></i><br><span id="notif_date" style="font-size:12px;color:#5AC7C7">' . $rows['action_time'] . '</span></a>';
+            } else {
+                $display .= '<a href="viewpost.php?token=' . $rows['post_ID'] . '"><span id="notif" style="font-size:16px;color:white">' . $rows['content'] . '</span><br><span id="notif_date" style="font-size:12px;color:#5AC7C7">' . $rows['action_time'] . '</span></a>';
+            }
+        }
+    } else {
+        $display .= '<br><center><p style="color:white">No Notifications.</p></center>';
+    }
+}
 
-                        $display = "";
-                        $sql = "SELECT * FROM notifications_tbl WHERE poster_ID = '$user_ID' ORDER BY ID DESC";
-                        $notif_result = mysqli_query($conn, $sql);
-                        if($notif_result){
-                            if(mysqli_num_rows($notif_result)>0){
-                                while($rows=mysqli_fetch_assoc($notif_result)){
-                                    $display .='<a href="viewpost.php?token='. $rows['post_ID'] .'">'.$rows['content'].'</a>';
-                                }
-                            }
-                            else{
-                                $display .= '<br><center><p style="color:white">No Notifications.</p></center>';
-                            }
-                       
-                            
-                        }
-                       
-                    ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,12 +51,15 @@ else{
                 <h3>Acade<span>Mx</span></h3>
             </div>
             <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn"><i class="fas fa-bell" style="font-size:20px;color:white;pointer-events:none;" ></i><?php  if(mysqli_num_rows($notif_result)>0){ $x=mysqli_num_rows($notif_result); echo '<span class="badge">'.$x.'</span>';} ?></button>
+                <button onclick="myFunction()" class="dropbtn"><i class="fas fa-bell" style="font-size:20px;color:white;pointer-events:none;"></i><?php if ($i > 0) {
+                                                                                                                                                        $x = $i;
+                                                                                                                                                        echo '<span class="badge" id="badge">' . $x . '</span>';
+                                                                                                                                                    } ?></button>
                 <div id="myDropdown" class="dropdown-content">
                     <div style="background-color:#5AC7C7;text-align:center;position:fixed;width:350px">Notifications</div>
                     <br>
-                        <?php echo $display; ?>
-                        
+                    <?php echo $display; ?>
+
                 </div>
             </div>
         </header>
@@ -117,6 +121,13 @@ else{
 <script>
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
+        document.getElementById("badge").style.display = "none";
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+
+        }
+        xhttp.open("GET", "notif_clear.php");
+        xhttp.send();
     }
 
     // Close the dropdown menu if the user clicks outside of it

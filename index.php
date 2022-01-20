@@ -72,11 +72,11 @@ if (isset($_POST["login"])) {
     if (mysqli_num_rows($check_email) > 0){
       $row = mysqli_fetch_assoc($check_email);
       $_SESSION["user_id"] = $row['ID'];
-      header("Location: home1.php");
+      header("Location: home.php");
     }else if(mysqli_num_rows($check_username) > 0){
       $row = mysqli_fetch_assoc($check_username);
       $_SESSION["user_id"] = $row['ID'];
-      header("Location: home1.php");
+      header("Location: home.php");
     }
   } else {
     echo "<script>alert('Login details is incorrect. Please try again.');</script>";

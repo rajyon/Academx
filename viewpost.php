@@ -8,6 +8,7 @@ if (!isset($_SESSION["user_id"])) {
 date_default_timezone_set("Asia/Manila");
 
 if(isset($_POST['commentpost_button'])){
+    $date= date("F j, Y, g:i A");
     $poster_ID = "";
     if(isset($_GET['token']))
        {
@@ -30,7 +31,7 @@ if(isset($_POST['commentpost_button'])){
   
 //Insertion to database       
        $sql= "INSERT INTO comment_tbl (post_id, commenter_id, comment_date, comment_content) VALUES ('$postId', '$commenterId', '$date','$commentContent')";
-       $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'comment', poster_ID = '$poster_ID';";
+       $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'comment', poster_ID = '$poster_ID', active = 1, action_time='$date';";
 
        if(!$conn->query($sql))
             {
@@ -44,6 +45,7 @@ if(isset($_POST['commentpost_button'])){
         
 //like dislike
     if(isset($_POST['like_button'])){
+        $date= date("F j, Y, g:i A");
         $poster_ID = "";
         $postId=$_GET['token'];
         $commenterId=$_SESSION['user_id'];
@@ -60,7 +62,7 @@ if(isset($_POST['commentpost_button'])){
        
         }
 
-        $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID';";
+        $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID', active = 1, action_time='$date'";
 
            
             $likerID = $_SESSION['user_id'];
@@ -122,6 +124,7 @@ if(isset($_POST['commentpost_button'])){
         }
         
         if(isset($_POST['dislike_button'])){
+            $date= date("F j, Y, g:i A");
             $poster_ID = "";
             $postId=$_GET['token'];
             $commenterId=$_SESSION['user_id'];
@@ -139,7 +142,7 @@ if(isset($_POST['commentpost_button'])){
            
             }
     
-            $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID';";
+            $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID', active = 1, action_time='$date'";
     
 
             $dislikerID = $_SESSION['user_id'];

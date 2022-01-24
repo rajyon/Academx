@@ -514,10 +514,10 @@ if (mysqli_num_rows($result2)) {
         }
 
     }
-    // 'txt_New1pass','txt_New2pass','PassCancel','i2','i3','i0','PassChange',i1
+    // 'txt_New1pass','txt_New2pass','PassCancel','i2','i3','i0','PassChange',text_Oldpass
     function PasswordSave(t, u, v, w, x, y, z, ID, s) {
-        var a = document.getElementById(t).value;
-        var b = document.getElementById(u).value;
+        var a = document.getElementById(t);
+        var b = document.getElementById(u);
         var c = document.getElementById(v);
         var d = document.getElementById(w);
         var e = document.getElementById(x);
@@ -527,12 +527,12 @@ if (mysqli_num_rows($result2)) {
         var i = document.getElementById("PassSave");
         var j = document.getElementById(s);
 
-        if (a == "" || b == "") {
+        if (a.value == "" || b.value == "") {
             h.innerHTML = "Password fields can't be empty.";
             h.style.display = "block";
             h.className = 'alert alert-danger';
         } else {
-            if (a == b) {
+            if (a.value == b.value) {
                 const xhttp = new XMLHttpRequest();
                 xhttp.onload = function() {
                     if (this.responseText == '1') {
@@ -556,12 +556,12 @@ if (mysqli_num_rows($result2)) {
                         this.responseText = "";
                     }
                 }
-                xhttp.open("GET", "update_pass.php?token=" + ID + "&pass=" + a);
+                xhttp.open("GET", "update_pass.php?token=" + ID + "&pass=" + a.value);
                 xhttp.send();
             } else {
-                g.innerHTML = "Password do not match!";
-                g.style.display = "block";
-                g.className = 'alert alert-danger';
+                h.innerHTML = "Password do not match!";
+                h.style.display = "block";
+                h.className = 'alert alert-danger';
             }
         }
     }

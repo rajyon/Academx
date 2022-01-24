@@ -75,6 +75,13 @@
   height: 40px;
   background-color:#5AC7C7;
   color: black;
+  padding-top: 9px;
+}
+.card_link:link{
+  text-decoration: none;
+  text-align: center;
+  
+  font-size: 14px;
 }
 .card_link:hover{
   border: 1px solid white;

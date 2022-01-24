@@ -216,7 +216,7 @@ if ($result = $conn->query($sql)) {
                                         <div class ="card_info">
                                         ' . $likebutton . '
                                         ' . $dislikebutton . '
-                                        <button class="card_link"><a href="viewpost.php?token=' . $row['post_id'] . '" class = "link">View article</a></button>
+                                        <a href="viewpost.php?token=' . $row['post_id'] . '" class = "card_link">View article</a>
                                         </form>
                                     </div>
                                     
@@ -267,7 +267,7 @@ if ($result = $conn->query($sql)) {
                                     <div class ="card_info">
                                     ' . $likebutton . '
                                     ' . $dislikebutton . '
-                                    <button class="card_link"><a href="viewpost.php?token=' . $row['post_id'] . '" class = "link">View article</a></button>
+                                    <a href="viewpost.php?token=' . $row['post_id'] . '" class = "card_link">View article</a>
                                     </form>
                                     </div>
                                 </div>

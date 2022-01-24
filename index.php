@@ -26,13 +26,17 @@ if (isset($_POST["signup"])) {
   $token =  mysqli_real_escape_string($conn, (md5(date("Y-m-d").$email)));
 
   $check_email = mysqli_num_rows(mysqli_query($conn, "SELECT email FROM users_tbl WHERE email='$email'"));
+  $check_username = mysqli_num_rows(mysqli_query($conn, "SELECT username FROM users_tbl WHERE username='$username'"));
   
 
   if ($password !== $cpassword) {
     echo "<script>alert('Password did not match.');</script>";
   } elseif ($check_email > 0) {
-    echo "<script>alert('Email already exists in out database.');</script>";
-  } else {
+    echo "<script>alert('Email already exists.');</script>";
+  } else if($check_username>0){
+    echo "<script>alert('Username already exists.');</script>";
+  }
+   else {
     
     $sql = "INSERT INTO users_tbl (fname, lname, sex, age, email, username, password, contactnumber, token) 
             VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber','$token');

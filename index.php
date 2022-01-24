@@ -63,13 +63,17 @@ if (isset($_POST["signup"])) {
 
 }
 
+
 if (isset($_POST["login"])) {
   $email = mysqli_real_escape_string($conn, $_POST["email"]);
   $username = mysqli_real_escape_string($conn, $_POST["email"]);
   $password = mysqli_real_escape_string($conn, md5($_POST["password"]));
   
+
   $check_email = mysqli_query($conn, "SELECT ID FROM users_tbl WHERE password = '$password' AND email='$email'");
   $check_username = mysqli_query($conn, "SELECT ID FROM users_tbl WHERE password = '$password' AND username= '$username'");
+  $adminuser = 'admin';
+  $adminpass = 'admin123';
 
   if (mysqli_num_rows($check_email) > 0 || mysqli_num_rows($check_username) > 0) 
   {
@@ -81,11 +85,13 @@ if (isset($_POST["login"])) {
       $row = mysqli_fetch_assoc($check_username);
       $_SESSION["user_id"] = $row['ID'];
       header("Location: home.php");
-    }
+    } 
   } else {
     echo "<script>alert('Login details is incorrect. Please try again.');</script>";
   }
- 
+  if ($_POST["email"] == 'admin' && $_POST["password"] == 'admin123'){
+    header("Location: adminhome.php");
+  } 
 }
 
 ?>
@@ -105,7 +111,10 @@ if (isset($_POST["login"])) {
     <div class="forms-container">
       <div class="signin-signup">
         <form action="" method="post" class="sign-in-form">
-          <h2 class="title">Log in</h2>
+        <div style="margin-right: 25px; padding-bottom: 70px">
+        <img src="img/reallogo.png" class="image" alt="" />
+        </div> 
+        <h2 class="title">Log in</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="text" placeholder="Enter Email Address Or Username" name="email" value="<?php echo $_POST['email']; ?>" required />
@@ -116,7 +125,9 @@ if (isset($_POST["login"])) {
           </div>
           <input type="submit" value="login" name="login" class="btn solid" />
           <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a href="forgot-password.php" style="color: #4590ef;">Forgot Password?</a></p>
-         </form>
+         
+        </form>
+         
         <!-- register -->
         <form action="" class="sign-up-form" method="post">
           <h2 class="title">Register</h2>

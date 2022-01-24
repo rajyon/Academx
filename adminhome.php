@@ -32,15 +32,15 @@ session_start();
         <div class="contentx">
         <table class="table" border = "3">
        <tr >
-           <th style="text-align:center;">Post ID</th>
-           <th style="text-align:center;">Post Title</th>
-           <th style="text-align:center;">Poster ID</th>
-           <th style="text-align:center;">Post Type</th>
-           <th style="text-align:center;">Post Group</th>
-           <th style="text-align:center;">Post Date</th>
-           <th style="text-align:center;">Like Amount</th>
-           <th style="text-align:center;">Dislike Amount</th>
-           <th style="text-align:center;">ACTION</th>
+           <th style="text-align:center; font-size:22px">Post ID</th>
+           <th style="text-align:center; font-size:22px">Post Title</th>
+           <th style="text-align:center; font-size:22px">Poster ID</th>
+           <th style="text-align:center; font-size:22px">Post Type</th>
+           <th style="text-align:center; font-size:22px">Post Group</th>
+           <th style="text-align:center; font-size:22px">Post Date</th>
+           <th style="text-align:center; font-size:22px">Like Amount</th>
+           <th style="text-align:center; font-size:22px">Dislike Amount</th>
+           <th style="text-align:center; font-size:22px">ACTION</th>
            <br>
        </tr>
        <?php
@@ -59,8 +59,7 @@ session_start();
                   .'<td style="width: 200px;" align="center">'.$row["post_date"].'</td>'
                   .'<td style="width: 200px;" align="center">'.$row["like_amount"].'</td>'
                   .'<td style="width: 200px;" align="center">'.$row["dislike_amount"].'</td>'
-                  ."<td style = 'width: 200px;' align='center'><a href='delete.php? token=". $row["post_id"] ."'> Viewpost </a></td>" 
-                  ."<td style = 'width: 200px;' align='center'><a onClick=\"javascript: return confirm('Are you sure you want to Delete this?');\" href='delete.php? token=". $row["post_id"] ."'> Delete </a></td>" 
+                  ."<td style = 'width: 200px;' align='center'><a href='adminviewpost.php? token=" . $row["post_id"] . "'> Viewpost </a><br><br><a onClick=\"javascript: return confirm('Are you sure you want to Delete this?');\" href='admindelete.php? token=". $row["post_id"] ."'> Delete </a></td>" 
                   .'</tr>';   
             }
           } else {

@@ -368,7 +368,7 @@ ________________________________________________________________________________
                     <h6 style="color: black; padding-left:10px; display: inline-block;">Commenting as: <?php echo $username1; ?></h6>
                 </div>
                 <form  name="comment_post" method="post">
-                    <textarea maxlength="350" id ="comment_post" name ="comment_post" rows ="2" style ="width:100%; display:block;"required></textarea>
+                    <textarea maxlength="350" id ="comment_post" name ="comment_post" rows ="3" style ="width:100%; display:block;"required></textarea>
                     <div id = "text_area_remain">350 Characters Remaining</div>
                     
                     <script>
@@ -416,7 +416,7 @@ ________________________________________________________________________________
                             <h6 style="color: black;  display: inline-block;"> '.$row['comment_date'].' </h6> 
                         </div>
                            <form  name="frmInsertPost" method="post">
-                                <textarea readonly id ="comment_show" name ="comment_show" rows ="2" style ="color:black; width:100%; display:block;">'. $row['comment_content'].'</textarea>
+                                <textarea readonly id ="comment_show" name ="comment_show" rows ="3" style ="color:black; width:100%; display:block;">'. $row['comment_content'].'</textarea>
                             </form>
                     </div>'; 
                     }

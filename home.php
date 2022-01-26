@@ -202,12 +202,12 @@ if ($result = $conn->query($sql)) {
                                     <img src="' . $row['post_picture'] . '" alt="" style="width:100%">    
                                     <div class="container">
                                     <br>
+                                        <h8 style ="color:gray; font-weight: bold;">Posted by: </h8>' . '
+                                        <h9>' .  $poster_name . '<br>' . '
                                         <h8 style ="color:gray; font-weight: bold;">Date: </h8>
                                         <h9>' . $row['post_date'] . '<br>' . '
                                         <h8 style ="color:gray; font-weight: bold;">Post ID: </h8>' . '
                                         <h9>' . $row['post_id'] . '<br>' . '
-                                        <h8 style ="color:gray; font-weight: bold;">Posted by: </h8>' . '
-                                        <h9>' .  $poster_name . '<br>' . '
                                         <hr style= "border-top: 5px solid #cccc;"></hr>
                                         <h2>' . $row['post_title'] . '</h2>
                                         <p style= "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350ch;">' . $row['post_content'] . '</p>
@@ -255,6 +255,8 @@ if ($result = $conn->query($sql)) {
                                 <img src="' . $row['post_picture'] . '" alt="" style="width:100%">    
                                 <div class="container">
                                 <br>
+                                    <h8 style ="color:gray; font-weight: bold;">Posted by: </h8>' . '
+                                    <h9>' .  $poster_name . '<br>' . '
                                     <h8 style ="color:gray; font-weight: bold;">Date: </h8>
                                     <h9>' . $row['post_date'] . '<br>' . '
                                     <h8 style ="color:gray; font-weight: bold;">Post ID: </h8>' . '

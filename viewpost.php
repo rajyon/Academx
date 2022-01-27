@@ -394,7 +394,6 @@ ________________________________________________________________________________
                         });
                     </script>
                     <input id = "commentpost_button" name= "commentpost_button" type ="submit" value ="POST"/>
-
                 </form>
                 <br><br>   
                 </div>
@@ -402,7 +401,6 @@ ________________________________________________________________________________
             </div>
             <div <?php if ($checker!=0 || $gchecker == 'B'){ echo 'style="display:none"';}?> style = "border:solid thin #aaa; padding: 10px; background-color:none;">
             <?php
-               
                     $commenter_id = $_SESSION['user_id'];
                     $postId=$_GET['token'];
                     $query ="SELECT * FROM amx_comment_tbl WHERE post_id = '$postId'";
@@ -419,14 +417,13 @@ ________________________________________________________________________________
                             $row4 = mysqli_fetch_assoc($commentname);
                             $nameofcommenter = $row4['fname'] . ' ' . $row4['lname'];
                         }       
-                    echo'
+                    echo '
                     <div class="column"> 
-                        <div style ="justify-content: space-between;">
-                            <h6 style="color: black;  display: inline-block;"> '.$nameofcommenter.'</h6> 
-                            <h6 style="color: black;  display: inline-block;"> '.$row['comment_date'].' </h6> 
-                        </div>
                            <form  name="frmInsertPost" method="post">
-                                <textarea readonly id ="comment_show" name ="comment_show" rows ="3" style ="color:black; width:100%; display:block;">'. $row['comment_content'].'</textarea>
+                                <div readonly id ="comment_show" name ="comment_show" rows ="3" style ="color:black; width:100%; display:block;background:white;word-wrap: break-word;">
+                                <span style="padding:5px;color: white;font-weight:bold; background:#5AC7C7;border-radius:5px;">' . $nameofcommenter . '</span><span style="color: #3F3F3F;font-size:12px;float:right;">[' . $row['comment_date'] . ']</span>
+                                <span style="padding:5px;color: white; background:green;border-radius:5px;font-size:9px;line-height:30px">Student</span>
+                                </br><span style="text-align: justify;">↪&nbsp'. $row['comment_content'] . '<span></div>  
                             </form>
                     </div>'; 
                     }

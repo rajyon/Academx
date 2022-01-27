@@ -13,7 +13,7 @@ session_start();
         $notifContent = "$liker liked your post.";
         if(isset($_GET['token'])){
          $ID = $_GET['token'];
-         $sql = "SELECT * FROM post_tbl WHERE post_id = '$ID'";
+         $sql = "SELECT * FROM amx_post_tbl WHERE post_id = '$ID'";
          $result1 = $conn->query($sql);
          if(mysqli_num_rows($result1)>0){
             $row1 = mysqli_fetch_assoc($result1);
@@ -22,12 +22,12 @@ session_start();
        
         }
 
-        $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID', active = 1, action_time='$date'";
+        $notifsql = "INSERT INTO amx_notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID', active = 1, action_time='$date'";
 
            
             $likerID = $_SESSION['user_id'];
             $postID = $_GET['token'];
-            $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
+            $preselect = "SELECT * FROM amx_likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
             $PSresult = mysqli_query($conn, $preselect);
             $color = "";
             
@@ -35,21 +35,21 @@ session_start();
                 $row=mysqli_fetch_assoc($PSresult);
                 $typeReact = $row['typeReact'];
                 if($typeReact == 'like'){
-                    $updateLike = "DELETE FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";
+                    $updateLike = "DELETE FROM amx_likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";
                     $ULresult = mysqli_query($conn, $updateLike);
-                    $selectUpdate1 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+                    $selectUpdate1 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
                     $selectResult1 = mysqli_query($conn, $selectUpdate1);
                     if(mysqli_num_rows($selectResult1) > 0){
                         $row1=mysqli_fetch_assoc($selectResult1);
                         $likeamount1=$row1['like_amount'];
                         $likeamount1 = $likeamount1 - 1;
-                        $update_Like1 = "UPDATE post_tbl SET like_amount = '$likeamount1' WHERE post_id ='$postID'";
+                        $update_Like1 = "UPDATE amx_post_tbl SET like_amount = '$likeamount1' WHERE post_id ='$postID'";
                         mysqli_query($conn, $update_Like1);
                     }
                 }else{
-                    $updatedisLikeToLike = "UPDATE likedislike_tbl SET typeReact = 'like' WHERE liker_id = '$likerID' AND post_ID = '$postID'";
+                    $updatedisLikeToLike = "UPDATE amx_likedislike_tbl SET typeReact = 'like' WHERE liker_id = '$likerID' AND post_ID = '$postID'";
                     $ULTDresult = mysqli_query($conn, $updatedisLikeToLike);
-                    $selectUpdate = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+                    $selectUpdate = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
                     $selectResult = mysqli_query($conn, $selectUpdate);
                     if(mysqli_num_rows($selectResult) > 0){
                         $row1=mysqli_fetch_assoc($selectResult);
@@ -57,7 +57,7 @@ session_start();
                         $dislikeamount1 = $dislikeamount1 - 1;
                         $likeamount1=$row1['like_amount'];
                         $likeamount1 = $likeamount1 + 1;
-                        $update_Like1 = "UPDATE post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
+                        $update_Like1 = "UPDATE amx_post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                         mysqli_query($conn, $update_Like1);
                         if(!$conn->query($notifsql)){
                             echo $conn->error;
@@ -66,15 +66,15 @@ session_start();
                 }
 
             }else {
-                $insertL = "INSERT INTO likedislike_tbl SET post_id = '$postID', liker_id = '$likerID', typeReact = 'like'";
+                $insertL = "INSERT INTO amx_likedislike_tbl SET post_id = '$postID', liker_id = '$likerID', typeReact = 'like'";
                 $resultiL = mysqli_query($conn, $insertL);
-                $selectUpdate2 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+                $selectUpdate2 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
                 $selectResult2 = mysqli_query($conn, $selectUpdate2);
                 if(mysqli_num_rows($selectResult2) > 0){
                     $row2=mysqli_fetch_assoc($selectResult2);
                     $likeamount2=$row2['like_amount'];
                     $likeamount2++;
-                    $update_Like2 = "UPDATE post_tbl SET like_amount = '$likeamount2' WHERE post_id ='$postID'";
+                    $update_Like2 = "UPDATE amx_post_tbl SET like_amount = '$likeamount2' WHERE post_id ='$postID'";
                     mysqli_query($conn, $update_Like2);
                     if(!$conn->query($notifsql)){
                         echo $conn->error;
@@ -93,7 +93,7 @@ session_start();
             if(isset($_GET['token']))
            {
              $ID = $_GET['token'];
-             $sql = "SELECT * FROM post_tbl WHERE post_id = '$ID'";
+             $sql = "SELECT * FROM amx_post_tbl WHERE post_id = '$ID'";
              $result1 = $conn->query($sql);
              if(mysqli_num_rows($result1)>0){
                 $row1 = mysqli_fetch_assoc($result1);
@@ -102,33 +102,33 @@ session_start();
            
             }
     
-            $notifsql = "INSERT INTO notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID', active = 1, action_time='$date'";
+            $notifsql = "INSERT INTO amx_notifications_tbl SET post_ID= '$postId', actor_ID = '$commenterId', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID', active = 1, action_time='$date'";
     
 
             $dislikerID = $_SESSION['user_id'];
             $postID = $_GET['token'];
-            $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";   
+            $preselect = "SELECT * FROM amx_likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";   
             $PSresult = mysqli_query($conn, $preselect);
 
             if(mysqli_num_rows($PSresult) > 0){
                 $row=mysqli_fetch_assoc($PSresult);
                 $typeReact = $row['typeReact'];
                 if($typeReact == 'dislike'){
-                    $updatedisLike = "DELETE FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";
+                    $updatedisLike = "DELETE FROM amx_likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";
                     $ULresult = mysqli_query($conn, $updatedisLike);
-                    $selectUpdate1 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+                    $selectUpdate1 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
                     $selectResult1 = mysqli_query($conn, $selectUpdate1);
                     if(mysqli_num_rows($selectResult1) > 0){
                         $row1=mysqli_fetch_assoc($selectResult1);
                         $dislikeamount1=$row1['dislike_amount'];
                         $dislikeamount1 = $dislikeamount1 - 1;
-                        $update_disLike1 = "UPDATE post_tbl SET dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
+                        $update_disLike1 = "UPDATE amx_post_tbl SET dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                         mysqli_query($conn, $update_disLike1);
                     }
                 }else{
-                    $updateLikeTodisLike = "UPDATE likedislike_tbl SET typeReact = 'dislike' WHERE liker_id = '$dislikerID' AND post_ID = '$postID'";
+                    $updateLikeTodisLike = "UPDATE amx_likedislike_tbl SET typeReact = 'dislike' WHERE liker_id = '$dislikerID' AND post_ID = '$postID'";
                     $ULTDresult = mysqli_query($conn, $updateLikeTodisLike);
-                    $selectUpdate = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+                    $selectUpdate = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
                     $selectResult = mysqli_query($conn, $selectUpdate);
                     if(mysqli_num_rows($selectResult) > 0){
                         $row1=mysqli_fetch_assoc($selectResult);
@@ -136,7 +136,7 @@ session_start();
                         $dislikeamount1 = $dislikeamount1 + 1;
                         $likeamount1=$row1['like_amount'];
                         $likeamount1 = $likeamount1 - 1;
-                        $update_disLike1 = "UPDATE post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
+                        $update_disLike1 = "UPDATE amx_post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                         mysqli_query($conn, $update_disLike1);
                         if(!$conn->query($notifsql)){
                             echo $conn->error;
@@ -145,16 +145,16 @@ session_start();
                 }
 
             }else {
-                $insertdL = "INSERT INTO likedislike_tbl SET post_id = '$postID', liker_id = '$dislikerID', typeReact = 'dislike'";
+                $insertdL = "INSERT INTO amx_likedislike_tbl SET post_id = '$postID', liker_id = '$dislikerID', typeReact = 'dislike'";
                 $resultiL = mysqli_query($conn, $insertdL);
-                $selectUpdate2 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+                $selectUpdate2 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
                 $selectResult2 = mysqli_query($conn, $selectUpdate2);
 
                 if(mysqli_num_rows($selectResult2) > 0){
                     $row2=mysqli_fetch_assoc($selectResult2);
                     $dislikeamount2=$row2['dislike_amount'];
                     $dislikeamount2++;
-                    $update_disLike2 = "UPDATE post_tbl SET dislike_amount = '$dislikeamount2' WHERE post_id ='$postID'";
+                    $update_disLike2 = "UPDATE amx_post_tbl SET dislike_amount = '$dislikeamount2' WHERE post_id ='$postID'";
                     mysqli_query($conn, $update_disLike2);
                     if(!$conn->query($notifsql)){
                         echo $conn->error;
@@ -206,14 +206,14 @@ $post_group = "";
        if(isset($_GET['token']))
        {
          $ID = $_GET['token'];
-         $sql = "SELECT * FROM post_tbl WHERE post_id = '$ID'";
+         $sql = "SELECT * FROM amx_post_tbl WHERE post_id = '$ID'";
          $result1 = $conn->query($sql);
          if(mysqli_num_rows($result1)>0){
             $row1 = mysqli_fetch_assoc($result1);
             $post_group = $row1['post_group'];
             $poster_ID = $row1['userid'];
             $post_code = "";
-            $presqlx = "SELECT * FROM group_tbl WHERE group_name = '$post_group'";
+            $presqlx = "SELECT * FROM amx_group_tbl WHERE group_name = '$post_group'";
             $preresult6 = mysqli_query($conn,$presqlx);
             if (mysqli_num_rows($preresult6)) {
                 $prerow = mysqli_fetch_assoc($preresult6);
@@ -221,14 +221,14 @@ $post_group = "";
             }
             // $sqlx = "SELECT * FROM group_transac WHERE member_ID = '$useID' AND group_code = '$post_code'";
             $idofuser = $row1['userid'];
-            $query = "SELECT * FROM users_img WHERE ID = '$idofuser' LIMIT 1";
+            $query = "SELECT * FROM amx_users_img WHERE ID = '$idofuser' LIMIT 1";
             $results2 = mysqli_query($conn, $query);
             if (mysqli_num_rows($results2)) {
                 $row2 = mysqli_fetch_assoc($results2);
                 $profileImage = $row2['profile_image'];
             }
             $profileName = "";
-            $query = "SELECT * FROM users_tbl WHERE ID = '$idofuser' LIMIT 1";
+            $query = "SELECT * FROM amx_users_tbl WHERE ID = '$idofuser' LIMIT 1";
             $results3 = mysqli_query($conn, $query);
        
             if (mysqli_num_rows($results3)) {

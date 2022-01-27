@@ -8,8 +8,8 @@ $userID = $_SESSION["user_id"];
 $groupID = $_GET['token'];
 $date = date("Y-m-d");
 
-$sql = "INSERT INTO group_transac SET group_code='$groupID', member_ID = '$userID', date_joined = '$date'";
-$check = mysqli_query($conn,"SELECT * FROM group_transac WHERE group_code = '$groupID' AND member_ID = '$userID'");
+$sql = "INSERT INTO amx_group_transac SET group_code='$groupID', member_ID = '$userID', date_joined = '$date'";
+$check = mysqli_query($conn,"SELECT * FROM amx_group_transac WHERE group_code = '$groupID' AND member_ID = '$userID'");
 $result = mysqli_query($conn,$sql);
 
 if(mysqli_num_rows($check) > 0){

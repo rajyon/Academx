@@ -12,7 +12,7 @@ if (isset($_POST["resetPassword"])) {
   $password = mysqli_real_escape_string($conn, md5($_POST["new_password"]));
   $cpassword = mysqli_real_escape_string($conn, md5($_POST["cnew_password"]));
   if ($password === $cpassword) {
-    $sql = "UPDATE users_tbl SET password='$password' WHERE token='{$_GET["token"]}'";
+    $sql = "UPDATE amx_users_tbl SET password='$password' WHERE token='{$_GET["token"]}'";
     mysqli_query($conn, $sql);
     header("Location: index.php");
   } else {

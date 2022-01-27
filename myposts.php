@@ -47,14 +47,14 @@ if(isset($_POST[$like])){
     if(isset($_GET['token'])){
         $postID = $_GET['token'];  
     }
-    $sql = "SELECT * FROM post_tbl WHERE post_id ='$postID'";
+    $sql = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID'";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result)) {
     $row = mysqli_fetch_assoc($result);
 }
 
 
-    $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
+    $preselect = "SELECT * FROM amx_likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";   
     $PSresult = mysqli_query($conn, $preselect);
 
     if(mysqli_num_rows($PSresult) > 0){
@@ -62,27 +62,27 @@ if(isset($_POST[$like])){
         $typeReact = $row['typeReact'];
      
         if($typeReact == 'like'){
-            $updateLike = "DELETE FROM likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";
+            $updateLike = "DELETE FROM amx_likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";
             $ULresult = mysqli_query($conn, $updateLike);
             $newcolor = 'ffffff';
             $fortextcolor = "3F3F3F";
             $forbordercolor = "3F3F3F";
-            $selectUpdate1 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+            $selectUpdate1 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
             $selectResult1 = mysqli_query($conn, $selectUpdate1);
             if(mysqli_num_rows($selectResult1) > 0){
                 $row1=mysqli_fetch_assoc($selectResult1);
                 $likeamount1=$row1['like_amount'];
                 $likeamount1 = $likeamount1 - 1;
-                $update_Like1 = "UPDATE post_tbl SET like_amount = '$likeamount1' WHERE post_id ='$postID'";
+                $update_Like1 = "UPDATE amx_post_tbl SET like_amount = '$likeamount1' WHERE post_id ='$postID'";
                 mysqli_query($conn, $update_Like1);
             }
         }else{
-            $updatedisLikeToLike = "UPDATE likedislike_tbl SET typeReact = 'like' WHERE liker_id = '$likerID' AND post_ID = '$postID'";
+            $updatedisLikeToLike = "UPDATE amx_likedislike_tbl SET typeReact = 'like' WHERE liker_id = '$likerID' AND post_ID = '$postID'";
             $ULTDresult = mysqli_query($conn, $updatedisLikeToLike);
             $newcolor ='3F3F3F';
             $fortextcolor = "ffffff";
             $forbordercolor = "ffffff";
-            $selectUpdate = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+            $selectUpdate = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
             $selectResult = mysqli_query($conn, $selectUpdate);
             if(mysqli_num_rows($selectResult) > 0){
                 $row1=mysqli_fetch_assoc($selectResult);
@@ -90,25 +90,25 @@ if(isset($_POST[$like])){
                 $dislikeamount1 = $dislikeamount1 - 1;
                 $likeamount1=$row1['like_amount'];
                 $likeamount1 = $likeamount1 + 1;
-                $update_Like1 = "UPDATE post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
+                $update_Like1 = "UPDATE amx_post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                 mysqli_query($conn, $update_Like1);
             }
         }
 
     }else {
-        $insertL = "INSERT INTO likedislike_tbl SET post_id = '$postID', liker_id = '$likerID', typeReact = 'like'";
+        $insertL = "INSERT INTO amx_likedislike_tbl SET post_id = '$postID', liker_id = '$likerID', typeReact = 'like'";
         $resultiL = mysqli_query($conn, $insertL);
         $newcolor = '3F3F3F';
         $fortextcolor = "ffffff";
         $forbordercolor = "ffffff";
-        $selectUpdate2 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+        $selectUpdate2 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
         $selectResult2 = mysqli_query($conn, $selectUpdate2);
 
         if(mysqli_num_rows($selectResult2) > 0){
             $row2=mysqli_fetch_assoc($selectResult2);
             $likeamount2=$row2['like_amount'];
             $likeamount2++;
-            $update_Like2 = "UPDATE post_tbl SET like_amount = '$likeamount2' WHERE post_id ='$postID'";
+            $update_Like2 = "UPDATE amx_post_tbl SET like_amount = '$likeamount2' WHERE post_id ='$postID'";
             mysqli_query($conn, $update_Like2);
         }
     }
@@ -122,40 +122,40 @@ if(isset($_POST[$dislike])){
     if(isset($_GET['token'])){
         $postID = $_GET['token'];  
     }
-    $sql = "SELECT * FROM post_tbl WHERE post_id ='$postID'";
+    $sql = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID'";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result)) {
     $row = mysqli_fetch_assoc($result);
 }
     $dislikerID = $_SESSION['user_id'];
-    $preselect = "SELECT * FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";   
+    $preselect = "SELECT * FROM amx_likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";   
     $PSresult = mysqli_query($conn, $preselect);
 
     if(mysqli_num_rows($PSresult) > 0){
         $row=mysqli_fetch_assoc($PSresult);
         $typeReact = $row['typeReact'];
         if($typeReact == 'dislike'){
-            $updatedisLike = "DELETE FROM likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";
+            $updatedisLike = "DELETE FROM amx_likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";
             $ULresult = mysqli_query($conn, $updatedisLike);
             $newcolor1 = 'ffffff';
             $fortextcolor1 = "3F3F3F";
             $forbordercolor1 = "3F3F3F";
-            $selectUpdate1 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+            $selectUpdate1 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
             $selectResult1 = mysqli_query($conn, $selectUpdate1);
             if(mysqli_num_rows($selectResult1) > 0){
                 $row1=mysqli_fetch_assoc($selectResult1);
                 $dislikeamount1=$row1['dislike_amount'];
                 $dislikeamount1 = $dislikeamount1 - 1;
-                $update_disLike1 = "UPDATE post_tbl SET dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
+                $update_disLike1 = "UPDATE amx_post_tbl SET dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                 mysqli_query($conn, $update_disLike1);
             }
         }else{
-            $updateLikeTodisLike = "UPDATE likedislike_tbl SET typeReact = 'dislike' WHERE liker_id = '$dislikerID' AND post_ID = '$postID'";
+            $updateLikeTodisLike = "UPDATE amx_likedislike_tbl SET typeReact = 'dislike' WHERE liker_id = '$dislikerID' AND post_ID = '$postID'";
             $ULTDresult = mysqli_query($conn, $updateLikeTodisLike);
             $newcolor1 ='3F3F3F';
             $fortextcolor1 = "ffffff";
             $forbordercolor1 = "ffffff";
-            $selectUpdate = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+            $selectUpdate = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
             $selectResult = mysqli_query($conn, $selectUpdate);
             if(mysqli_num_rows($selectResult) > 0){
                 $row1=mysqli_fetch_assoc($selectResult);
@@ -163,15 +163,15 @@ if(isset($_POST[$dislike])){
                 $dislikeamount1 = $dislikeamount1 + 1;
                 $likeamount1=$row1['like_amount'];
                 $likeamount1 = $likeamount1 - 1;
-                $update_disLike1 = "UPDATE post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
+                $update_disLike1 = "UPDATE amx_post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                 mysqli_query($conn, $update_disLike1);
             }
         }
 
     }else {
-        $insertdL = "INSERT INTO likedislike_tbl SET post_id = '$postID', liker_id = '$dislikerID', typeReact = 'dislike'";
+        $insertdL = "INSERT INTO amx_likedislike_tbl SET post_id = '$postID', liker_id = '$dislikerID', typeReact = 'dislike'";
         $resultiL = mysqli_query($conn, $insertdL);
-        $selectUpdate2 = "SELECT * FROM post_tbl WHERE post_id ='$postID' LIMIT 1";
+        $selectUpdate2 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
         $selectResult2 = mysqli_query($conn, $selectUpdate2);
         $newcolor1 = '3F3F3F';
         $fortextcolor1 = "ffffff";
@@ -180,7 +180,7 @@ if(isset($_POST[$dislike])){
             $row2=mysqli_fetch_assoc($selectResult2);
             $dislikeamount2=$row2['dislike_amount'];
             $dislikeamount2++;
-            $update_disLike2 = "UPDATE post_tbl SET dislike_amount = '$dislikeamount2' WHERE post_id ='$postID'";
+            $update_disLike2 = "UPDATE amx_post_tbl SET dislike_amount = '$dislikeamount2' WHERE post_id ='$postID'";
             mysqli_query($conn, $update_disLike2);
         }
     }
@@ -223,7 +223,7 @@ if(isset($_POST[$dislike])){
             <div class="row">         
                <?php
                     $i = 0;
-                    $sql= "SELECT * FROM post_tbl WHERE userid ='$idofuser' ORDER BY post_date DESC";
+                    $sql= "SELECT * FROM amx_post_tbl WHERE userid ='$idofuser' ORDER BY post_date DESC";
                     $result = $conn->query($sql);
                    
                     while($row = mysqli_fetch_assoc($result))

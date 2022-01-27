@@ -14,7 +14,7 @@ if (!isset($_SESSION["user_id"])) {
 <?php
 $i = 0;
 $display = "";
-$sql = "SELECT * FROM notifications_tbl WHERE poster_ID = '$user_ID' ORDER BY ID DESC";
+$sql = "SELECT * FROM amx_notifications_tbl WHERE poster_ID = '$user_ID' ORDER BY ID DESC";
 $notif_result = mysqli_query($conn, $sql);
 if ($notif_result) {
     if (mysqli_num_rows($notif_result) > 0) {
@@ -67,7 +67,7 @@ if ($notif_result) {
             <center>
                 <?php
                 $username = $_SESSION['user_id'];
-                $query = "SELECT * FROM users_img WHERE ID = '$username' LIMIT 1";
+                $query = "SELECT * FROM amx_users_img WHERE ID = '$username' LIMIT 1";
                 $results = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($results)) {
@@ -79,7 +79,7 @@ if ($notif_result) {
                 <?php
                 $profileName = "";
                 $username = $_SESSION['user_id'];
-                $query = "SELECT * FROM users_tbl WHERE ID = '$username' LIMIT 1";
+                $query = "SELECT * FROM amx_users_tbl WHERE ID = '$username' LIMIT 1";
                 $results = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($results)) {
@@ -92,7 +92,7 @@ if ($notif_result) {
                 <?php
                 $profileBio = "";
                 $username = $_SESSION['user_id'];
-                $query = "SELECT * FROM users_img WHERE ID = '$username' LIMIT 1";
+                $query = "SELECT * FROM amx_users_img WHERE ID = '$username' LIMIT 1";
                 $results = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($results)) {

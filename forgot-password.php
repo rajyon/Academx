@@ -10,7 +10,7 @@ if (isset($_SESSION["user_id"])) {
 if (isset($_POST["resetPassword"])) {
   $email = mysqli_real_escape_string($conn, $_POST["email"]);
 
-  $check_email = mysqli_query($conn, "SELECT * FROM users_tbl WHERE email='$email'");
+  $check_email = mysqli_query($conn, "SELECT * FROM amx_users_tbl WHERE email='$email'");
 
   if (mysqli_num_rows($check_email) > 0) {
     $data = mysqli_fetch_assoc($check_email);

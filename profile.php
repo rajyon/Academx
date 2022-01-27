@@ -16,8 +16,8 @@ $User = "";
 $CNumber = "";
 $ProfileImahe = "";
 $Bio = "";
-$query1 = "SELECT * FROM users_tbl WHERE ID = '$username' LIMIT 1";
-$query2 = "SELECT * FROM users_img WHERE ID = '$username' LIMIT 1";
+$query1 = "SELECT * FROM amx_users_tbl WHERE ID = '$username' LIMIT 1";
+$query2 = "SELECT * FROM amx_users_img WHERE ID = '$username' LIMIT 1";
 $result1 = mysqli_query($conn, $query1);
 
 if (mysqli_num_rows($result1)) {
@@ -602,7 +602,7 @@ if (isset($_POST['save1'])) {
     $csex = $_POST['sex'];
     $cage = $_POST['age'];
 
-    $sql = "UPDATE users_tbl SET fname='$cfname',lname='$clname',sex='$csex',age='$cage' WHERE ID='$username'";
+    $sql = "UPDATE amx_users_tbl SET fname='$cfname',lname='$clname',sex='$csex',age='$cage' WHERE ID='$username'";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -612,7 +612,7 @@ if (isset($_POST['save1'])) {
 if (isset($_POST['save2'])) {
     $cemail = $_POST['email'];
     $ccnum = $_POST['contactnum'];
-    $sql = "UPDATE users_tbl SET email='$cemail',contactnumber='$ccnum' WHERE ID='$username'";
+    $sql = "UPDATE amx_users_tbl SET email='$cemail',contactnumber='$ccnum' WHERE ID='$username'";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -627,7 +627,7 @@ if (isset($_POST['save2'])) {
 if (isset($_POST['submit1'])) {
     $cbio = $_POST['txt_bio'];
 
-    $sql = "UPDATE users_img SET bio='$cbio' WHERE ID='$username'";
+    $sql = "UPDATE amx_users_img SET bio='$cbio' WHERE ID='$username'";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         echo "<div class='alert alert-success'>Bio has been changed!</div>";
@@ -675,7 +675,7 @@ if (isset($_POST["submit"]) && isset($_FILES["fileToUpload"]) && !empty($_FILES[
         // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            $sql = "UPDATE users_img SET profile_image='$target_file' WHERE ID='$username'";
+            $sql = "UPDATE amx_users_img SET profile_image='$target_file' WHERE ID='$username'";
             mysqli_query($conn, $sql);
             echo "<div class='alert alert-success'>Profile picture has been changed.</div>";
         } else {

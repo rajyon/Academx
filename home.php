@@ -25,7 +25,7 @@ if (isset($_POST['post_button'])) {
         $picture = 'img/org.png';
     }
     //Insertion to database      
-    $sql = "INSERT INTO post_tbl SET post_id='$PostId',userid='$userId',post_title='$title',post_type='$post_type', post_group = '$post_group', post_content='$content',post_date='$date',post_picture='$picture'";
+    $sql = "INSERT INTO amx_post_tbl SET post_id='$PostId',userid='$userId',post_title='$title',post_type='$post_type', post_group = '$post_group', post_content='$content',post_date='$date',post_picture='$picture'";
 
     if (!$conn->query($sql)) {
         echo "<script>alert('Post Not Uploaded Please try again!!');</script>";
@@ -42,12 +42,12 @@ if (isset($_POST['filter'])) {
 
 $user = $_SESSION['user_id'];
 $group_names = array();
-$sql = "SELECT * FROM group_transac WHERE member_ID = '$user'";
+$sql = "SELECT * FROM amx_group_transac WHERE member_ID = '$user'";
 
 if ($result = $conn->query($sql)) {
     while ($row = $result->fetch_assoc()) {
         $item = $row['group_code'];
-        $sql1 = "SELECT * FROM group_tbl WHERE group_code = '$item'";
+        $sql1 = "SELECT * FROM amx_group_tbl WHERE group_code = '$item'";
         $result2 = mysqli_query($conn, $sql1);
         $row1 = $result2->fetch_assoc();
         $item2 = $row1['group_name'];
@@ -167,14 +167,14 @@ if ($result = $conn->query($sql)) {
                     array_unshift($group_list, 'Public');
 
                     foreach ($group_list as $to_filter) {
-                        $sql = "SELECT * FROM post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC; ";
+                        $sql = "SELECT * FROM amx_post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC; ";
                         $result = $conn->query($sql);
                         $i = 0;
                         while ($row = mysqli_fetch_assoc($result)) {
                             $i++;
                             $ID = $row['post_id'];
                             $username = $row['userid'];
-                            $query = "SELECT * FROM users_tbl WHERE ID = '$username' LIMIT 1";
+                            $query = "SELECT * FROM amx_users_tbl WHERE ID = '$username' LIMIT 1";
                             $results = mysqli_query($conn, $query);
                             $profileName = "";
                             if (mysqli_num_rows($results)) {
@@ -185,7 +185,7 @@ if ($result = $conn->query($sql)) {
                             $likebutton = '<button type="button" id = "like_button' . $i . '" name ="like_button' . $i . '" onclick="GetLike(this.value,this.id)" value=' . $ID . ' class ="fas fa-thumbs-up"   style="font-size:17px; margin-right: 15px; background-color: #ffffff; color: #3F3F3F; border: 1px solid #3F3F3F;border-radius: 5px;width: 110px;height: 40px;"><p id="button_txt">' . $row['like_amount'] . '</p></button>';
                             $dislikebutton = '<button type="button" id = "dislike_button' . $i . '" name ="dislike_button' . $i . '" onclick="GetDislike(this.value,this.id)" value=' . $ID . ' class ="fas fa-thumbs-down" style="font-size:17px; margin-right: 15px; background-color: #ffffff; color: #3F3F3F; border: 1px solid #3F3F3F;border-radius: 5px;width: 110px;height: 40px;""><p id="button_txt">' . $row['dislike_amount'] . '</p></button>';
                             $userId = $_SESSION['user_id'];
-                            $sqlcheck = "SELECT * FROM likedislike_tbl WHERE post_id = '$ID' AND liker_id = '$userId'";
+                            $sqlcheck = "SELECT * FROM amx_likedislike_tbl WHERE post_id = '$ID' AND liker_id = '$userId'";
                             $checkresult = mysqli_query($conn, $sqlcheck);
                             if (mysqli_num_rows($checkresult) > 0) {
                                 $rowreaction = mysqli_fetch_assoc($checkresult);
@@ -228,7 +228,7 @@ if ($result = $conn->query($sql)) {
                     echo $display;
                 } else {
                     echo "<div class='alert alert-dark' style='text-align:center;font-size:16px;font-weight:bold'>$to_filter</div>";
-                    $sql = "SELECT * FROM post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC ";
+                    $sql = "SELECT * FROM amx_post_tbl WHERE post_group = '$to_filter' ORDER BY post_date DESC ";
                     $result = $conn->query($sql);
 
                     $i = 0;
@@ -238,7 +238,7 @@ if ($result = $conn->query($sql)) {
                         $likebutton = '<button type="button" id = "like_button' . $i . '" name ="like_button' . $i . '" onclick="GetLike(this.value,this.id)" value=' . $ID . ' class ="fas fa-thumbs-up"   style="font-size:17px; margin-right: 15px; background-color: #ffffff; color: #3F3F3F; border: 1px solid #3F3F3F;border-radius: 5px;width: 110px;height: 40px;"><p id="button_txt">' . $row['like_amount'] . '</p></button>';
                         $dislikebutton = '<button type="button" id = "dislike_button' . $i . '" name ="dislike_button' . $i . '" onclick="GetDislike(this.value,this.id)" value=' . $ID . ' class ="fas fa-thumbs-down" style="font-size:17px; margin-right: 15px; background-color: #ffffff; color: #3F3F3F; border: 1px solid #3F3F3F;border-radius: 5px;width: 110px;height: 40px;""><p id="button_txt">' . $row['dislike_amount'] . '</p></button>';
                         $userId = $_SESSION['user_id'];
-                        $sqlcheck = "SELECT * FROM likedislike_tbl WHERE post_id = '$ID' AND liker_id = '$userId'";
+                        $sqlcheck = "SELECT * FROM amx_likedislike_tbl WHERE post_id = '$ID' AND liker_id = '$userId'";
                         $checkresult = mysqli_query($conn, $sqlcheck);
                         if (mysqli_num_rows($checkresult) > 0) {
                             $rowreaction = mysqli_fetch_assoc($checkresult);

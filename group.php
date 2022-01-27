@@ -12,16 +12,16 @@ if (isset($_POST['btn_create'])) {
     $grpName = $_POST['txt_name'];
     $grpCode = $_POST['txt_code'];
     $date = date("Y-m-d");
-    $presql = "SELECT * FROM group_tbl WHERE group_name='$grpName'";
+    $presql = "SELECT * FROM amx_group_tbl WHERE group_name='$grpName'";
     $preresult = mysqli_query($conn,$presql);
     if(mysqli_num_rows($preresult)>0){
         echo "<script> alert('Group Already Exists! : [Change Group Name]')</script>";
     }
     else{
-        $sql = "INSERT INTO group_tbl SET group_code='$grpCode', group_name='$grpName', date_created='$date', created_by='$profile_name'";
+        $sql = "INSERT INTO amx_group_tbl SET group_code='$grpCode', group_name='$grpName', date_created='$date', created_by='$profile_name'";
     $result = mysqli_query($conn, $sql);
     if ($result) {
-        $sql1 = "INSERT INTO group_transac SET group_code='$grpCode', member_ID = '$userID', date_joined = '$date'";
+        $sql1 = "INSERT INTO amx_group_transac SET group_code='$grpCode', member_ID = '$userID', date_joined = '$date'";
         $result1 = mysqli_query($conn, $sql1);
         if ($result1) {
             echo "<script> alert('Group Created!')</script>";
@@ -37,7 +37,7 @@ if (isset($_POST["btn_search"])){
     $to_search = $_POST['txt_search'];
     $num=0;
 
-    $sql = "SELECT * FROM group_tbl WHERE group_code LIKE '$to_search%' OR group_name LIKE '$to_search%'";
+    $sql = "SELECT * FROM amx_group_tbl WHERE group_code LIKE '$to_search%' OR group_name LIKE '$to_search%'";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {

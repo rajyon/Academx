@@ -45,7 +45,7 @@ session_start();
        </tr>
        <?php
           //Display data
-          $sql = "SELECT * FROM post_tbl";
+          $sql = "SELECT * FROM amx_post_tbl";
           $result = $conn-> query ($sql);
           
           if ($result->num_rows > 0) {

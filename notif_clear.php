@@ -10,6 +10,6 @@ if (!isset($_SESSION["user_id"])) {
     $user_ID = $_SESSION["user_id"];
 }
 
-$sql = "UPDATE notifications_tbl SET active=0 WHERE poster_ID = '$user_ID'";
+$sql = "UPDATE amx_notifications_tbl SET active=0 WHERE poster_ID = '$user_ID'";
 $notif_result = mysqli_query($conn, $sql);
 ?>

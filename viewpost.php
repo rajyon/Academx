@@ -315,7 +315,7 @@ if (isset($_POST['dislike_button'])) {
                         <img style="width:5%; height:5%; border-radius:5px" src="<?php echo $profileImage; ?>" class="profile_image" alt="">
                         <h2 style="color: white; padding-left:10px; display: inline-block; vertical-align: bottom;"><?php echo $profileName; ?></h2>
                         <span style="color:#5AC7C7;font-weight: bold;float:right"><span style="-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;-o-user-select: none;user-select: none;color:white;font-weight: bold;">#</span><?php echo $row1['post_id']; ?></span><br>
-                        <span style="color:white;float:right"><?php echo $row1['post_date']; ?></span>
+                        <span style="color:white;float:right;font-size:12px"><?php echo $row1['post_date']; ?></span>
                     </div>
                     <br>
                     <form name="frmInsertPost" method="post">

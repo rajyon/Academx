@@ -22,7 +22,7 @@ $row = mysqli_fetch_assoc($result);
 $poster_ID = $row['userid'];
 }
 
-$notifsql = "INSERT INTO amx_notifications_tbl SET post_ID= '$postID', actor_ID = '$dislikerID', content = '$notifContent', action_type = 'like', poster_ID = '$poster_ID', active = 1, action_time='$date';";
+$notifsql = "INSERT INTO amx_notifications_tbl SET post_ID= '$postID', actor_ID = '$dislikerID', content = '$notifContent', action_type = 'dislike', poster_ID = '$poster_ID', active = 1, action_time='$date';";
 $preselect = "SELECT * FROM amx_likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";   
 $PSresult = mysqli_query($conn, $preselect);
 
@@ -31,7 +31,9 @@ if(mysqli_num_rows($PSresult) > 0){
     $typeReact = $row['typeReact'];
     if($typeReact == 'dislike'){
         $updatedisLike = "DELETE FROM amx_likedislike_tbl WHERE liker_id = '$dislikerID' AND post_id = '$postID'";
+        $updateNotification = "DELETE FROM amx_notifications_tbl WHERE actor_ID = '$dislikerID' AND post_ID = '$postID' AND action_type ='dislike'";
         $ULresult = mysqli_query($conn, $updatedisLike);
+        $UNresult = mysqli_query($conn, $updateNotification);
         $selectUpdate1 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
         $selectResult1 = mysqli_query($conn, $selectUpdate1);
         if(mysqli_num_rows($selectResult1) > 0){

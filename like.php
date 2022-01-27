@@ -32,7 +32,10 @@ if(mysqli_num_rows($PSresult) > 0){
  
     if($typeReact == 'like'){
         $updateLike = "DELETE FROM amx_likedislike_tbl WHERE liker_id = '$likerID' AND post_id = '$postID'";
+        $updateNotification = "DELETE FROM amx_notifications_tbl WHERE actor_ID = '$likerID' AND post_ID = '$postID'AND action_type ='like'";
+        $updateNotification = "DELETE FROM amx_notifications_tbl WHERE actor_ID = '$dislikerID' AND post_ID = '$postID' AND action_type = 'dislike'";
         $ULresult = mysqli_query($conn, $updateLike);
+        $UNresult = mysqli_query($conn, $updateNotification);
         $selectUpdate1 = "SELECT * FROM amx_post_tbl WHERE post_id ='$postID' LIMIT 1";
         $selectResult1 = mysqli_query($conn, $selectUpdate1);
         if(mysqli_num_rows($selectResult1) > 0){

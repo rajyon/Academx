@@ -247,8 +247,8 @@ if(isset($_POST[$dislike])){
                                         <div class ="card_info">
                                         <button disabled id = "like_button" name ="like_button'.$i.'" class ="fas fa-thumbs-up" style="font-size:17px; margin-right: 15px; background-color: #'.$newcolor.'; border-color: #'.$forbordercolor.'; color: #'.$fortextcolor.';"><p>'.$row['like_amount'].'</p></button>
                                         <button disabled id = "dislike_button" name ="dislike_button'.$i.'" class ="fas fa-thumbs-down" style="font-size:15px; background-color: #'.$newcolor1.'; border-color: #'.$forbordercolor1.'; color: #'.$fortextcolor1.';"><p>'.$row['dislike_amount'].'</p></button>
-                                        <button class="card_link1"><a href="delete.php?token='. $row['post_id'] .'" style = "color:black;text-decoration:none;">Delete</a></button>
-                                        <button class="card_link2"><a href="viewpost.php?token='. $row['post_id'] .'" class = "link">View article</a></button>
+                                       <a href="delete.php?token='. $row['post_id'] .'" class="card_link1" style = "color:black;text-decoration:none;">Delete</a>
+                                       <a href="viewpost.php?token='. $row['post_id'] .'"  class="card_link2">View article</a>
                                         </form>
                             </div>
                             </div>

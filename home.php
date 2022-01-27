@@ -12,11 +12,10 @@ if (isset($_POST['post_button'])) {
 
     $PostId = uniqid("");
     $userId = $_SESSION['user_id'];
-    $title = $_POST['subject_post'];
+    $title = mysqli_real_escape_string($conn,$_POST['subject_post']);
     $post_type = $_POST['type'];
     $post_group = $_POST['group'];
-
-    $content = $_POST['content_post'];
+    $content = mysqli_real_escape_string($conn,$_POST['content_post']);
     $date = date("Y-m-d  [h:i A]");
 
     if ($post_type == 'Public') {

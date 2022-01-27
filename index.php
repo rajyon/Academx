@@ -25,8 +25,8 @@ if (isset($_POST["signup"])) {
   $contactNumber = mysqli_real_escape_string($conn, ($_POST["regis_contactnumber"]));
   $token =  mysqli_real_escape_string($conn, (md5(date("Y-m-d").$email)));
 
-  $check_email = mysqli_num_rows(mysqli_query($conn, "SELECT email FROM users_tbl WHERE email='$email'"));
-  $check_username = mysqli_num_rows(mysqli_query($conn, "SELECT username FROM users_tbl WHERE username='$username'"));
+  $check_email = mysqli_num_rows(mysqli_query($conn, "SELECT amx_email FROM users_tbl WHERE email='$email'"));
+  $check_username = mysqli_num_rows(mysqli_query($conn, "SELECT amx_username FROM users_tbl WHERE username='$username'"));
   
 
   if ($password !== $cpassword) {
@@ -38,9 +38,9 @@ if (isset($_POST["signup"])) {
   }
    else {
     
-    $sql = "INSERT INTO users_tbl (fname, lname, sex, age, email, username, password, contactnumber, token) 
+    $sql = "INSERT INTO amx_users_tbl (fname, lname, sex, age, email, username, password, contactnumber, token) 
             VALUES ('$firstName', '$lastName', '$sex', '$age', '$email', '$username','$password','$contactNumber','$token');
-            INSERT INTO  users_img SET profile_image='img/default.png',bio='No bio.', ID =(SELECT ID FROM users_tbl WHERE email='$email');";
+            INSERT INTO  amx_users_img SET profile_image='img/default.png',bio='No bio.', ID =(SELECT ID FROM users_tbl WHERE email='$email');";
            
     $result = mysqli_multi_query($conn, $sql);
    
@@ -70,8 +70,8 @@ if (isset($_POST["login"])) {
   $password = mysqli_real_escape_string($conn, md5($_POST["password"]));
   
 
-  $check_email = mysqli_query($conn, "SELECT ID FROM users_tbl WHERE password = '$password' AND email='$email'");
-  $check_username = mysqli_query($conn, "SELECT ID FROM users_tbl WHERE password = '$password' AND username= '$username'");
+  $check_email = mysqli_query($conn, "SELECT ID FROM amx_users_tbl WHERE password = '$password' AND email='$email'");
+  $check_username = mysqli_query($conn, "SELECT ID FROM amx_users_tbl WHERE password = '$password' AND username= '$username'");
   $adminuser = 'admin';
   $adminpass = 'admin123';
 

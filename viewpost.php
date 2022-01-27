@@ -37,9 +37,11 @@ if(isset($_POST['commentpost_button'])){
             {
              echo $conn->error;//getting the error 
             }else{
-               if(!$conn->query($notifsql)){
-                echo $conn->error;
-               }
+                if ($poster_ID != $commenterId){
+                    if(!$conn->query($notifsql)){
+                        echo $conn->error;
+                       }
+                }    
             }
         }
         
@@ -99,9 +101,11 @@ if(isset($_POST['commentpost_button'])){
                         $likeamount1 = $likeamount1 + 1;
                         $update_Like1 = "UPDATE amx_post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                         mysqli_query($conn, $update_Like1);
-                        if(!$conn->query($notifsql)){
-                            echo $conn->error;
-                           }
+                        if ($poster_ID != $likerID){
+                            if(!$conn->query($notifsql)){
+                                echo $conn->error;
+                               }
+                        }
                     }
                 }
 
@@ -116,9 +120,11 @@ if(isset($_POST['commentpost_button'])){
                     $likeamount2++;
                     $update_Like2 = "UPDATE amx_post_tbl SET like_amount = '$likeamount2' WHERE post_id ='$postID'";
                     mysqli_query($conn, $update_Like2);
-                    if(!$conn->query($notifsql)){
-                        echo $conn->error;
-                       }
+                    if ($poster_ID != $likerID){
+                        if(!$conn->query($notifsql)){
+                            echo $conn->error;
+                           }
+                    }
                 }
             }           
         }
@@ -178,9 +184,11 @@ if(isset($_POST['commentpost_button'])){
                         $likeamount1 = $likeamount1 - 1;
                         $update_disLike1 = "UPDATE amx_post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
                         mysqli_query($conn, $update_disLike1);
-                        if(!$conn->query($notifsql)){
-                            echo $conn->error;
-                           }
+                        if ($poster_ID != $dislikerID){
+                            if(!$conn->query($notifsql)){
+                                echo $conn->error;
+                               }
+                        }  
                     }
                 }
 
@@ -196,9 +204,11 @@ if(isset($_POST['commentpost_button'])){
                     $dislikeamount2++;
                     $update_disLike2 = "UPDATE amx_post_tbl SET dislike_amount = '$dislikeamount2' WHERE post_id ='$postID'";
                     mysqli_query($conn, $update_disLike2);
-                    if(!$conn->query($notifsql)){
-                        echo $conn->error;
-                       }
+                    if ($poster_ID != $dislikerID){
+                        if(!$conn->query($notifsql)){
+                            echo $conn->error;
+                           }
+                    }   
                 }
             }
         

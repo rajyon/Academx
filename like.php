@@ -55,9 +55,11 @@ if(mysqli_num_rows($PSresult) > 0){
             $likeamount1 = $likeamount1 + 1;
             $update_Like1 = "UPDATE amx_post_tbl SET like_amount = '$likeamount1', dislike_amount = '$dislikeamount1' WHERE post_id ='$postID'";
             mysqli_query($conn, $update_Like1);
-            if(!$conn->query($notifsql)){
-                echo $conn->error;
-               }
+            if ($poster_ID != $likerID){
+                if(!$conn->query($notifsql)){
+                    echo $conn->error;
+                   }
+            }
         }
     }
 
@@ -73,9 +75,11 @@ if(mysqli_num_rows($PSresult) > 0){
         $likeamount2++;
         $update_Like2 = "UPDATE amx_post_tbl SET like_amount = '$likeamount2' WHERE post_id ='$postID'";
         mysqli_query($conn, $update_Like2);
-        if(!$conn->query($notifsql)){
-            echo $conn->error;
-           }
+        if ($poster_ID != $likerID){
+            if(!$conn->query($notifsql)){
+                echo $conn->error;
+               }
+        } 
     }
 }
 

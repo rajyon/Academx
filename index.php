@@ -133,11 +133,11 @@ if (isset($_POST["login"])) {
           <h2 class="title">Register</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="First Name" name="regis_fname" value="<?php echo $_POST["regis_fname"]; ?>" required />
+            <input type="text" placeholder="First Name" name="regis_fname" value="<?php echo $_POST["regis_fname"]; ?>" minlength="2" maxlenght = "15" required />
           </div>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Last Name" name="regis_lname" value="<?php echo $_POST["regis_lname"]; ?>" required />
+            <input type="text" placeholder="Last Name" name="regis_lname" value="<?php echo $_POST["regis_lname"]; ?>" minlength="2" maxlenght = "15" required />
           </div>
           <div class="input-radio">
             <i class="fas fa-user" style= "margin-right: 10px; margin-left: 8px;"></i>
@@ -146,7 +146,7 @@ if (isset($_POST["login"])) {
           </div>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Age" name="regis_age" value="<?php echo $_POST["regis_age"]; ?>" required />
+            <input type="number" placeholder="Age" name="regis_age" value="<?php echo $_POST["regis_age"]; ?>" min="2" required />
           </div>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
@@ -154,19 +154,19 @@ if (isset($_POST["login"])) {
           </div>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
-            <input type="text" placeholder="Username" name="regis_username" value="<?php echo $_POST["regis_username"]; ?>" required />
+            <input type="text" placeholder="Username" name="regis_username" value="<?php echo $_POST["regis_username"]; ?>" minlength="4" maxlenght = "15" required />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" name="regis_password" value="<?php echo $_POST["regis_password"]; ?>" required />
+            <input type="password" placeholder="Password" name="regis_password" value="<?php echo $_POST["regis_password"]; ?>"  minlength="5" maxlenght = "15"required />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Confirm Password" name="regis_cpassword" value="<?php echo $_POST["regis_cpassword"]; ?>" required />
+            <input type="password" placeholder="Confirm Password" name="regis_cpassword" value="<?php echo $_POST["regis_cpassword"]; ?>"  minlength="5" maxlenght = "15"required />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="text" placeholder="Contact Number" name="regis_contactnumber" value="<?php echo $_POST["regis_contactnumber"]; ?>" required />
+            <input type="number" placeholder="Contact Number" name="regis_contactnumber" value="<?php echo $_POST["regis_contactnumber"]; ?>"  min="11" required />
           </div>
           <input type="submit" class="btn" name="signup" value="Sign up" />
         </form>

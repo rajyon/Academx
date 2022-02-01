@@ -1,0 +1,24 @@
+.card_link{
+    border: 1px solid black;
+    float:right;  
+    border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    background-color:#5AC7C7;
+    color: black;
+    margin-bottom: 12px;
+  }
+  .card_link:link{
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+  }
+  .card_link:hover{
+    border: 1px solid black;
+    float:right;  
+    border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    background-color: white;
+    color: black;
+  }

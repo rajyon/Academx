@@ -15,6 +15,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="style_homepage.css" />
+    <link rel="stylesheet" href="style_admin.css" />
     <title>Homepage</title>
 </head>
 
@@ -33,6 +34,7 @@ session_start();
                 <h4>admin</h4>
             </center>
             <a href="adminhome.php"><i class="fas fa-home"></i><span>Posts</span></a>
+            <a href="adminusers.php"><i class="fas fa-home"></i><span>Users</span></a>
             <div style="vertical-align: sub;">
                 <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
             </div>

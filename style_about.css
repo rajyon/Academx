@@ -50,7 +50,9 @@ body {
   .container {
     padding: 0 16px;
   }
-  
+  .container h2{
+    font-size: 1.4rem;
+  }
   .container::after, .row::after {
     content: "";
     clear: both;

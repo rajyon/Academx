@@ -49,28 +49,26 @@ session_start();
 <div class="row">
   <div class="column">
     <div class="card">
-      <img src="img/catss.PNG" alt="Jane" style="width:100%">
+      <img src="img/marvin.png" alt="Jane" style="width:100%">
       <div class="container">
       <br>
         <h2>Juadian, Marvin Sean</h2>
-        <p class="title">CEO & Founder</p>
+        <p class="title">Frontend</p>
         <p>BSIT Student at Technological University of the Phiilippines </p>
         <p>jaudianmarvin01@gmail.com</p>
-        <p><button class="button">Contact</button></p>
       </div>
     </div>
   </div>
 
   <div class="column">
     <div class="card">
-      <img src="img/akiropandesal.PNG" alt="Mike" style="width:100%">
+      <img src="img/jawo.png" alt="Mike" style="width:100%">
       <div class="container">
       <br>
         <h2>Manzon, John Eduard</h2>
-        <p class="title">Art Director</p>
+        <p class="title">Frontend</p>
         <p>BSIT Student at Technological University of the Phiilippines</p>
-        <p>johneduard.manzon@tup.edu.ph</p>
-        <p><button class="button">Contact</button></p>
+        <p>mazonjohneduard@gmail.com</p>
       </div>
     </div>
   </div>
@@ -81,24 +79,22 @@ session_start();
       <div class="container">
         <br>
         <h2>Perez, Crisjahn</h2>
-        <p class="title">Designer</p>
+        <p class="title">Backend</p>
         <p>BSIT Student at Technological University of the Phiilippines</p>
         <p>crisjahn.perez09@gmail.com</p>
-        <p><button class="button">Contact</button></p>
       </div>
     </div>
   </div>
 
   <div class="column">
     <div class="card">
-      <img src="img/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg" alt="John" style="width:100%">
+      <img src="img/luke.png" alt="John" style="width:100%">
       <div class="container">
       <br>
         <h2>Toledo, Luke</h2>
-        <p class="title">Designer</p>
+        <p class="title">Backend</p>
         <p>BSIT Student at Technological University of the Phiilippines</p>
         <p>luketoledo61@gmail.com</p>
-        <p><button class="button">Contact</button></p>
       </div>
     </div>
   </div>

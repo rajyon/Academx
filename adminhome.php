@@ -60,7 +60,7 @@ session_start();
                   .'<td style="width: 200px;" align="center">'.$row["post_date"].'</td>'
                   .'<td style="width: 200px;" align="center">'.$row["like_amount"].'</td>'
                   .'<td style="width: 200px;" align="center">'.$row["dislike_amount"].'</td>'
-                  ."<td style = 'width: 200px;' align='center'><a href='adminviewpost.php? token=" . $row["post_id"] . "'> Viewpost </a><br><br><a href='#? token=" . $row["post_id"] . "'> Print </a><br><br><a onClick=\"javascript: return confirm('Are you sure you want to Delete this?');\" href='admindelete.php? token=". $row["post_id"] ."'> Delete </a></td>" 
+                  ."<td style = 'width: 200px;' align='center;'><a href='adminviewpost.php? token=" . $row["post_id"] . "'> Viewpost </a><span>|</span><a href='#? token=" . $row["post_id"] . "'> Print </a><span>|</span><a onClick=\"javascript: return confirm('Are you sure you want to Delete this?');\" href='admindelete.php? token=". $row["post_id"] ."'> Delete </a></td>" 
                   .'</tr>';   
             }
           } else {

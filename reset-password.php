@@ -29,7 +29,8 @@ if (isset($_POST["resetPassword"])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style_index.css" />
-  <title>Sign in & Sign up Form - Pure Coding</title>
+  <link rel="icon" type="image/png" href ="img/tablogo.png">
+  <title></title>
 </head>
 
 <body>

@@ -103,6 +103,7 @@ if (isset($_POST["login"])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style_index.css" />
+  <link rel="icon" type="image/png" href ="img/tablogo.png">
   <title>AcadeMx</title>
 </head>
 
@@ -111,7 +112,7 @@ if (isset($_POST["login"])) {
     <div class="forms-container">
       <div class="signin-signup">
         <form action="" method="post" class="sign-in-form">
-        <div style="margin-right: 25px; padding-bottom: 70px">
+        <div style="margin-left: 140px; padding-bottom: 70px; width: 82%;">
         <img src="img/reallogo.png" class="image" alt="" />
         </div> 
         <h2 class="title">Log in</h2>
@@ -176,8 +177,8 @@ if (isset($_POST["login"])) {
     <div class="panels-container">
       <div class="panel left-panel">
         <div class="content">
-          <h3>New here ?</h3>
-          <p style ="font-size: 19px;">
+          <h3 style ="margin-right:100px">New here ?</h3>
+          <p style ="font-size: 19px;margin-right:100px">
             What are you waiting for? <br><br>Be a member of <span>Acade</span><span style="color: #5AC7C7;">Mx</span>
           </p>
           <button class="btn transparent" id="sign-up-btn">
@@ -189,8 +190,8 @@ if (isset($_POST["login"])) {
       </div>
       <div class="panel right-panel">
         <div class="content">
-          <h3>One of us?</h3>
-          <p style ="font-size: 19px;">
+          <h3 style ="margin-right:100px">One of us?</h3>
+          <p style ="font-size: 19px; margin-right:100px">
           Already one of us? Enter now!
           </p>
           <button class="btn transparent" id="sign-in-btn">

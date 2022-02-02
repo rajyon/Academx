@@ -221,6 +221,7 @@ if (isset($_POST['dislike_button'])) {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="style_viewpost.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="icon" type="image/png" href ="img/tablogo.png">
     <title>Home</title>
 </head>
 

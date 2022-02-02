@@ -73,7 +73,7 @@ form.sign-in-form {
   width: 100%;
   background-color: #f0f0f0;
   margin: 10px 0;
-  height: 55px;
+  height: 50px;
   border-radius: .3rem;
   display: grid;
   grid-template-columns: 15% 85%;
@@ -83,30 +83,30 @@ form.sign-in-form {
 .input-radio {
     max-width: 380px;
     text-align: left;
-    padding-top: 18px;
+    padding-top: 15px;
     width: 100%;
     color: #acacac;
     background-color: #f0f0f0;
-    height: 55px;
+    height: 45px;
     border-radius: .3rem;
     line-height: 1;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.85rem;
     padding-left: 20px;
 }
 .input-radio i {
     line-height: 20px;
     color: #acacac;
     transition: 0.5s;
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 
 .input-field i {
   text-align: center;
-  line-height: 55px;
+  line-height: 45px;
   color: #acacac;
   transition: 0.5s;
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 .input-field input {
@@ -115,7 +115,7 @@ form.sign-in-form {
   border: none;
   line-height: 1;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: #333;
 }
 
@@ -194,8 +194,8 @@ form.sign-in-form {
 .container:before {
   content: "";
   position: absolute;
-  height: 2100px;
-  width: 2000px;
+  height: 1900px;
+  width: 1500px;
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
@@ -206,7 +206,7 @@ form.sign-in-form {
 }
 
 .image {
-  width: 100%;
+  width: 70%;
   transition: transform 1.1s ease-in-out;
   transition-delay: 0.4s;
 }
@@ -255,6 +255,7 @@ form.sign-in-form {
   height: 41px;
   font-weight: 600;
   font-size: 0.8rem;
+  margin-right:100px
 }
 
 .right-panel .image,

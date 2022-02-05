@@ -68,7 +68,7 @@ if ($result = $conn->query($sql)) {
     <link rel="stylesheet" href="style_home.css" />
     <link rel="stylesheet" href="style_cards.css" />
     <link rel="stylesheet" href="style_search.css" />
-    <link rel="icon" type="image/png" href ="img/tablogo.png">
+    <link rel="icon" type="image/png" href ="img/AcadeMx.png">
     <title>Home</title>
 </head>
 

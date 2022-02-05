@@ -14,7 +14,7 @@ session_start();
     <link rel="stylesheet" href="style_home.css" />
     <link rel="stylesheet" href="style_admin.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="icon" type="image/png" href ="img/tablogo.png">
+    <link rel="icon" type="image/png" href ="img/AcadeMx.png">
     <title>Home</title>
 </head>
 

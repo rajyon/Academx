@@ -42,13 +42,13 @@ body{
   width: 100%;
 }
 
-.card a{
- color: black;
- text-decoration: none;
- padding: 10px;
- background-color: #3F3F3F;
-color: white;
-border-radius: 5px;
+.card button{
+  text-decoration: none;
+  padding: 10px;
+  background-color: #3F3F3F;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
 }
 #back{
   float: left;

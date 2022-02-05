@@ -96,11 +96,11 @@ if (isset($_POST["btn_search"])){
 
                     Group Name:
                     <div class="input-field">
-                        <i class="fas fa-users"></i><input type="text" name="txt_name" placeholder="Enter name here..." required />
+                        <i class="fas fa-users"></i><input minlength="4" maxlength="25" type="text" name="txt_name" placeholder="Enter name here..." required />
                     </div>
                     Group Code:
                     <div class="input-field">
-                        <i class="fas fa-hashtag"></i><input type="text" name="txt_code" placeholder="Enter code here..." required />
+                        <i class="fas fa-hashtag"></i><input minlength="4" maxlength="25" type="text" name="txt_code" placeholder="Enter code here..." required />
                     </div>
                     <input style="width:100px; float:right" type="submit" name="btn_create" value="Create" />
                 </form>

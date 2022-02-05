@@ -73,10 +73,9 @@ if (isset($_POST["login"])) {
   $check_email = mysqli_query($conn, "SELECT ID FROM amx_users_tbl WHERE password = '$password' AND email='$email'");
   $check_username = mysqli_query($conn, "SELECT ID FROM amx_users_tbl WHERE password = '$password' AND username= '$username'");
   $adminuser = 'admin';
-  $adminpass = 'admin123';
+  $adminpass = 'AdMiN123';
 
-  if (mysqli_num_rows($check_email) > 0 || mysqli_num_rows($check_username) > 0) 
-  {
+  if (mysqli_num_rows($check_email) > 0 || mysqli_num_rows($check_username) > 0) {
     if (mysqli_num_rows($check_email) > 0){
       $row = mysqli_fetch_assoc($check_email);
       $_SESSION["user_id"] = $row['ID'];
@@ -87,11 +86,13 @@ if (isset($_POST["login"])) {
       header("Location: home.php");
     } 
   } else {
-    echo "<script>alert('Login details is incorrect. Please try again.');</script>";
+    if ($_POST["email"] == 'admin' && $_POST["password"] == 'AdMiN123'){
+      header("Location: adminhome.php");
+    } else{
+      echo "<script>alert('Login details is incorrect. Please try again.');</script>";
+    }
   }
-  if ($_POST["email"] == 'admin' && $_POST["password"] == 'admin123'){
-    header("Location: adminhome.php");
-  } 
+  
 }
 
 ?>

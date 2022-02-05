@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.contentx{
+    background-color: #EDEADE;
+     width:auto;
+     margin-left:16%;
+     height:100%;
+     padding:70px;
+     margin-bottom:0;
+     border: 5px solid #3F3F3F;
+     overflow: auto;
+}
+
+.card{
+  border: 5px solid #3F3F3F;
+  width: 45%;
+  display: inline-block;
+  text-align: center;
+  border-radius: 10px;
+  height: 50vh;
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  align-self: stretch;
+}
+
+a.card{
+ text-decoration: none; 
+}
+a.card:hover{
+  background-color: #3F3F3F;
+  border: 5px solid #5AC7C7;
+}
+a.card span{
+  color: red;
+  font-size: 20px;
+  font-weight: bolder;
+}

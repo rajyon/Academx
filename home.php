@@ -108,9 +108,9 @@ if ($result = $conn->query($sql)) {
                             }
                             ?>
                         </select>
-                        <textarea id="subject_post" maxlength="50" name="subject_post" placeholder="Subject or Title" rows="1" style="width:100%; display:block; " required></textarea>
+                        <textarea id="subject_post" minlength="4" maxlength="50" name="subject_post" placeholder="Subject or Title" rows="1" style="width:100%; display:block; " required></textarea>
                         <br>
-                        <textarea id="content_post" maxlength="350" name="content_post" placeholder="What do you think?" rows="5" style="width:100%; display:block;" required></textarea>
+                        <textarea id="content_post" minlength="4" maxlength="350" name="content_post" placeholder="What do you think?" rows="5" style="width:100%; display:block;" required></textarea>
                         <div id="text_area_remain">350 Characters Remaining</div>
 
                         <script>

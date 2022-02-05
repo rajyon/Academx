@@ -216,7 +216,7 @@ if (mysqli_num_rows($result2)) {
                 <tr>
                     <td>Varification Status</td>
                     <td>Not Verified</td>
-                    <td><a href="#">Update</a></td>
+                    <td><a href="select.php">Update</a></td>
                 </tr>
 
 

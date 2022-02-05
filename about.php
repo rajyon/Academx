@@ -100,6 +100,9 @@ session_start();
   </div>
 
 </div>
+<h2 style="text-align:center; border-top: 5px solid #5AC7C7; border-bottom: 5px solid #5AC7C7;  border-radius: 5px;">Credits</h2>
+<a href="https://www.flaticon.com/free-icons/female" title="female icons">Female icons created by Aficons studio - Flaticon</a><br>
+<a href="https://www.flaticon.com/free-icons/businessman" title="businessman icons">Businessman icons created by Vectors Market - Flaticon</a><br>
 </div>
  </div>
  

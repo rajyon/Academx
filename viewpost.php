@@ -8,8 +8,8 @@ if (!isset($_SESSION["user_id"])) {
 date_default_timezone_set("Asia/Manila");
 
 if (isset($_POST['commentpost_button'])) {
-    $date = date("F j, Y, g:i A");
     $poster_ID = "";
+    $date = date("F j, Y, g:i A");
     if (isset($_GET['token'])) {
         $ID = $_GET['token'];
         $sql = "SELECT * FROM amx_post_tbl WHERE post_id = '$ID'";
@@ -24,7 +24,7 @@ if (isset($_POST['commentpost_button'])) {
     $commenterId = $_SESSION['user_id'];
     $commenter = $_SESSION['Profile_Name'];
     $date = date("Y-m-d h:i:a");
-    $commentContent = mysqli_real_escape_string($conn,$_POST['comment_post']);
+    $commentContent = mysqli_real_escape_string($conn, $_POST['comment_post']);
     $notifContent = "$commenter commented on your post.";
 
     //Insertion to database       
@@ -208,6 +208,41 @@ if (isset($_POST['dislike_button'])) {
         }
     }
 }
+if(isset($_POST['SendReport']) ){
+   if(isset($_POST['Reason'])){
+    $content = $_POST['Reason'];
+    $poster_ID = "";
+    $postID = $_GET['token'];  
+    $reporter = $_SESSION["user_id"];
+    $reportdate = date("F j, Y, g:i A");
+
+    if($content == "Others"){
+        $content = $_POST['Others'];
+    }
+    
+
+    if (isset($_GET['token'])) {
+        $ID = $_GET['token'];
+        $sql = "SELECT * FROM amx_post_tbl WHERE post_id = '$ID'";
+        $result1 = $conn->query($sql);
+        if (mysqli_num_rows($result1) > 0) {
+            $row1 = mysqli_fetch_assoc($result1);
+            $poster_ID = $row1['userid'];
+        }
+    }
+    $sqlReport = "INSERT INTO amx_report_tbl SET post_ID = '$postID', reason_content = '$content', reported_by = '$reporter', report_date = '$reportdate', poster_ID = '$poster_ID'";
+
+    if (!$conn->query($sqlReport)) {
+        echo $conn->error;
+    }
+    else{
+        echo "<script>alert('Post has been reported successfully!');</script>";
+    }
+   }else{
+    echo "<script>alert('Report filing has been canceled!, please enter a reason for your report.');</script>";
+   }
+  
+}
 
 ?>
 <!DOCTYPE html>
@@ -221,12 +256,11 @@ if (isset($_POST['dislike_button'])) {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="style_viewpost.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="icon" type="image/png" href ="img/tablogo.png">
-    <title>Home</title>
+    <link rel="icon" type="image/png" href="img/tablogo.png">
+    <title>View Post</title>
 </head>
 
 <body>
-
     <div>
         <script src="//code.jquery.com/jquery.min.js"></script>
         <div id="nav-placeholder">
@@ -237,10 +271,10 @@ if (isset($_POST['dislike_button'])) {
             </script>
         </div>
     </div>
-
-    <div class="container-fluid" style="background-color: white;height:100vh">
-        <div class="contentx">
-
+    <div id="contentx1"></div>
+    <div class="container-fluid" style="background-color: white;height:100vh" >
+        <div class="contentx" id="contentx2">
+      
             <!-- for display of picture, name, post id, post date, post type -->
             <?php
             $checker = 0;
@@ -330,9 +364,12 @@ if (isset($_POST['dislike_button'])) {
                         <?php
                         $likerID = $_SESSION['user_id'];
                         $postID = $_GET['token'];
+                        $reported = 0;
 
                         $selectionofreact = "SELECT * FROM amx_likedislike_tbl WHERE liker_id = '$likerID' AND post_id ='$postID'";
+                        $ifReported = "SELECT * FROM amx_report_tbl WHERE reported_by = '$likerID' AND post_ID ='$postID'";
                         $SRresult = mysqli_query($conn, $selectionofreact);
+                        $IRresult = mysqli_query($conn,  $ifReported);
 
                         if (mysqli_num_rows($SRresult)) {
                             $forcolorow = mysqli_fetch_assoc($SRresult);
@@ -359,7 +396,16 @@ if (isset($_POST['dislike_button'])) {
                                 $forbordercolor1 = "3F3F3F";
                             }
                         }
+                        if(mysqli_num_rows($IRresult)){
+                            $reported = 1;  
+                            $msg='<i class="fas fa-check-square"></i>&nbsp;   Reported';
+                        }
+                        else{
+                            $msg='<i class="fas fa-times-square"></i>&nbsp;   Report';
+                        }
                         ?>
+                        
+                        <button type="button" <?php if ($reported==1){?>style="font-size:17px;float:right; color:black;background-color:white" disabled <?php } ?> style="color:red;font-size:17px;float:right;width:100px;color:red" onclick="ContainerShow()"> <?php echo $msg; ?></button>
                         <div class="wrapper">
                             <div class="like">
                                 <button id="like_button" name="like_button" class="fas fa-thumbs-up" style="font-size:17px; background-color: #<?php echo $newcolor; ?>; border-color: #<?php echo $forbordercolor; ?>; color: #<?php echo $fortextcolor; ?>;">
@@ -372,8 +418,10 @@ if (isset($_POST['dislike_button'])) {
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
+
                 <br>
                 <h2 style="text-align:center; border-bottom: 2px solid red;">Comment Section</h2>
                 <div <?php if ($gchecker == 'B') { ?>style="display:none" <?php } ?> style="border:solid thin #aaa; padding: 10px; padding-bottom:4px; background-color:none;">
@@ -437,6 +485,80 @@ if (isset($_POST['dislike_button'])) {
             </div>
         </div>
     </div>
+    <div style="display:none" id="ReportContainer">
+                <label style="background-color:#5AC7C7;width:100%;text-align:center;font-weight:bold;color:black">Report Post</label><br><br>
+                <label>Post ID:     <span style="color:#5AC7C7;font-weight:bold"><?php echo  $postId; ?></span></label><br><br>
+                <p>&nbsp;&nbsp;&nbsp;I would like to report this post because...</p>
+                <label>Reason:</label><br>
+                <form method="POST"> 
+                    <input type="radio" style="font-size: 12px;height: 1rem;" id="Reason1" name="Reason" value="Language">
+                    <label for="Reason1" >Language</label><br>
+                    <input type="radio" style="font-size: 12px;height: 1rem;" id="Reason2" name="Reason" value="Spam">
+                    <label for="Reason2">Spam</label><br>
+                    <input type="radio" style="font-size: 12px;height: 1rem;" id="Reason3" name="Reason" value="False Information">
+                    <label for="Reason3">False Information</label><br>
+                    <input type="radio" style="font-size: 12px;height: 1rem;" id="Reason4" name="Reason" value="Hate Speech">
+                    <label for="Reason4">Hate Speech</label><br>
+                    <input type="radio" style="font-size: 12px;height: 1rem;" id="Reason5" name="Reason" value="Terrorism" onclick="Checked(this)">
+                    <label for="Reason5">Terrorism</label><br><br>
+                    <input type="radio" style="font-size: 12px;height: 1rem;" id="Reason6" name="Reason" value="Others" onclick="Checked(this)">
+                    <label for="Reason6" id="Other">Other:</label><br>
+                    <input type="text" maxlength="50" id="Others" name="Others" for="Reason6" placeholder="[Other Reason]" style="background-color: white;width:80%;padding:5px;float:right" disabled></input><br><br><br>
+                    <input type="submit" value="Submit"style="float:left;width:100px;padding:1px;height:30px" name = "SendReport">
+                    <input type="button" value="Cancel" style="float:right;width:100px;padding:1px;height:30px" onclick="ReportCancel()" id="example">
+                </form>
+            </div>
+
 </body>
 
 </html>
+<script>
+    function ContainerShow(){
+        var x = document.getElementById("ReportContainer");
+        var y = document.getElementById("contentx1");
+        var z = document.getElementById("contentx2");
+
+        x.style.width="500px";
+        x.style.position="fixed";
+        x.style.top="50%";
+        x.style.left="50%";
+        x.style.transform="translate(-50%, -50%)";
+        x.style.backgroundColor="#3F3F3F";
+        x.style.padding="5px";
+        x.style.borderRadius="3px";
+        x.style.border="solid 5px #5AC7C7";
+        x.style.color="white";
+        x.style.display="block";
+        x.style.zIndex="1000";
+        z.style.pointerEvents="none";
+        y.style.display="block";
+        y.style.width="100%";
+        y.style.height="100%";
+        y.style.position="fixed";
+        y.style.zIndex="999";
+        y.style.backgroundColor = "rgba(0,0,0,0.8)";
+    }
+    function ReportCancel(){
+        var x = document.getElementById("ReportContainer");
+        var y = document.getElementById("contentx1");
+        var z = document.getElementById("contentx2");
+
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.pointerEvents="auto";
+
+    }
+    function Checked(clicked){
+        var x = document.getElementById("Reason6");
+        var y = document.getElementById("Others");
+
+
+        if(clicked.value == "Others"){
+            y.removeAttribute("disabled");
+            y.setAttribute("required",true);
+        }else{
+            y.setAttribute("disabled",true)
+        }
+        
+    }
+</script>

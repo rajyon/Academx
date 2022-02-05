@@ -10,7 +10,7 @@ $date = date("Y-m-d");
 
 $sql = "INSERT INTO amx_group_transac SET group_code='$groupID', member_ID = '$userID', date_joined = '$date'";
 $check = mysqli_query($conn,"SELECT * FROM amx_group_transac WHERE group_code = '$groupID' AND member_ID = '$userID'");
-$result = mysqli_query($conn,$sql);
+
 
 if(mysqli_num_rows($check) > 0){
     echo "<script>alert('You are already in this group!')
@@ -18,6 +18,7 @@ if(mysqli_num_rows($check) > 0){
         </script> ";
 }
 else{
+    $result = mysqli_query($conn,$sql);
     if($result){
         echo "<script>alert('Successfuly joined the group.')
         window.location.href='group.php';
